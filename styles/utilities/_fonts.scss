@@ -1,0 +1,71 @@
+@use "constants" as c;
+
+@font-face {
+    font-family: 'Roboto';
+    src: url(c.$fonts+"/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url(c.$fonts+"/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: 'Roboto-Italic';
+    src: url(c.$fonts+"/Roboto/Roboto-Italic.ttf");
+}
+
+@font-face {
+    font-family: 'Roboto-BoldItalic';
+    src: url(c.$fonts+"/Roboto/Roboto-BoldItalic.ttf");
+}
+
+@font-face {
+    font-family: 'Roboto-Black';
+    src: url(c.$fonts+"/Roboto/Roboto-Black.ttf");
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url(c.$fonts+"/Playfair/PlayfairDisplay-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Playfair Display Bold';
+    src: url(c.$fonts+"/Playfair/PlayfairDisplay-Bold.ttf");
+}
+
+@font-face {
+    font-family: 'Playfair Display Italic';
+    src: url(c.$fonts+"/Playfair/PlayfairDisplay-Italic.ttf");
+}
+
+@font-face {
+    font-family: 'Playfair Display BoldItalic';
+    src: url(c.$fonts+"/Playfair/PlayfairDisplay-BoldItalic.ttf");
+}
+
+@font-face {
+    font-family: 'Playfair Display Black';
+    src: url(c.$fonts+"/Playfair/PlayfairDisplay-Black.ttf");
+}
+
+@font-face {
+    font-family: 'Playfair Display Extra Bold';
+    src: url(c.$fonts+"/Playfair/PlayfairDisplay-ExtraBold.ttf");
+}
+
+@font-face {
+    font-family: 'Playfair Display Extra BoldItalic';
+    src: url(c.$fonts+"/Playfair/PlayfairDisplay-ExtraBoldItalic.ttf");
+}
+
+@font-face {
+    font-family: 'Space Grotesk';
+    src: url(c.$fonts+"/SpaceGrotesk/SpaceGrotesk-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Space Grotesk Bold';
+    src: url(c.$fonts+"/SpaceGrotesk/SpaceGrotesk-Bold.ttf");
+}

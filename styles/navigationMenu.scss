@@ -1,0 +1,48 @@
+@use "topBar";
+@use "utilities/constants" as c;
+@use "utilities/fonts";
+
+.navigationMenu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 0;
+	overflow: hidden;
+}
+
+.navigationMenu.showMenu {
+	overflow-y: scroll;
+	list-style: none;
+	position: fixed;
+	transition: width 0.7s linear;
+	transition-delay: 0.1s;
+	top: 0;
+	background-color: c.$mars-pink;
+	left: 0;
+	bottom: 0;
+	height: 100vh;
+	width: 100%;
+	overflow: hidden;
+	max-width: c.$navigaton-bar-width;
+	z-index: 9;
+}
+
+.navigationMenu.showMenu .navigationMenuList {
+	font-family: "Space Grotesk Bold";
+	font-size: 1.5em;
+	color: c.$cream;
+	list-style: none;
+	display: block;
+	padding: 30px 20px;
+	text-decoration: none;
+    white-space: nowrap;
+}
+
+.navigationMenu.showMenu .navigationMenuList .navigationMenuListItem {
+	margin: 20px 0;
+}
+
+.navigationMenuShowMenu .navigationMenuList li:first-child {
+	margin-top: 7rem;
+}
