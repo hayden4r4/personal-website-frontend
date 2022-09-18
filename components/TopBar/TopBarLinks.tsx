@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import NavigationMenu from "../NavigationMenu/NavigationMenu";
+import textShadowGenerator from '../Utilities/TextEffects';
+
 import HamburgerClosed from "../../public/static/icons/Hamburger_Closed.png";
 import HamburgerOpen from "../../public/static/icons/Hamburger_Open.png";
 import GithubIcon from "../../public/static/icons/Github.png";
 import LinkedInIcon from "../../public/static/icons/LinkedIn.png";
 import HomeIcon from "../../public/static/icons/Home.png";
 import Porfolio from "../../public/static/icons/Portfolio.png";
-import styles from "../../public/static/styles/utilities/_constants.module.scss";
 
 export default function TopBarLinks() {
 	var [hamburgerMenuOpen, setHamburgerMenuState] = useState(false);
@@ -33,13 +34,6 @@ export default function TopBarLinks() {
 	const hamburgerMenuToggle = () => {
 		setHamburgerMenuState(!hamburgerMenuOpen);
 	};
-
-	let shadowString: string = "";
-	for (let i: number = 1; i <= 4; i += 0.25) {
-		shadowString += `${i}px ${i}px ${styles.marsPink}, `;
-	}
-	shadowString = shadowString.slice(0, -2);
-
 
 	return (
 		<div className={`topBarLinks ${hamburgerMenuOpen ? "showMenu" : ""}`}>
@@ -103,7 +97,7 @@ export default function TopBarLinks() {
 					/>
 				</a>
 			</Link>
-			<div className="topBarHeader" style={{ textShadow: shadowString }}>
+			<div className="topBarHeader" style={{ textShadow: textShadowGenerator(0, 0.1, 0.0025) }}>
 				<p id="header">Hayden Rose</p>
 			</div>
 		</div>

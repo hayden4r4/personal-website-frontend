@@ -20,10 +20,10 @@
 	top: 100px;
 	text-align: center;
   z-index: 2;
-	// text-shadow: 5px 5px c.$mars-pink, 5.75px 5.75px c.$mars-pink,
-	// 	6.5px 6.5px c.$mars-pink, 7.25px 7.25px c.$mars-pink, 8px 8px c.$mars-pink,
-	// 	8.75px 8.75px c.$mars-pink, 9.5px 9.5px c.$mars-pink,
-	// 	10.25px 10.25px c.$mars-pink, 11px 11px c.$mars-pink,
-	// 	11.75px 11.75px c.$mars-pink, 12.5px 12.5px c.$mars-pink,
-	// 	13.25px 13.25px c.$mars-pink, 14px 14px c.$mars-pink;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
