@@ -9,7 +9,7 @@ export default function Portfolio() {
 	return (
 		<div>
 			<Head>
-				<title>Hayden Rose</title>
+				<title>Portfolio - Hayden Rose</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 				<meta name="darkreader-lock" />
 				<meta name="color-scheme" content="light" />
