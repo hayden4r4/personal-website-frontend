@@ -1,0 +1,76 @@
+@use "topBar";
+@use "utilities/constants" as c;
+@use "utilities/fonts";
+
+.navigationMenu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 0;
+	overflow: hidden;
+}
+
+.navigationMenu.showMenu {
+	overflow-y: scroll;
+	list-style: none;
+	position: fixed;
+	transition: width 0.4s linear;
+	transition-delay: 0.1s;
+	top: 0;
+	background-color: c.$mars-pink;
+	left: 0;
+	bottom: 0;
+	height: 100vh;
+	width: 100%;
+	overflow: hidden;
+	max-width: c.$navigaton-bar-width;
+	z-index: 9;
+}
+
+.navigationMenu.showMenu .navigationMenuList {
+	font-family: "Space Grotesk SemiBold";
+	color: c.$off-white;
+	font-size: 1.5em;
+	list-style: none;
+	display: block;
+	padding: 30px 20px;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.navigationMenu.showMenu .navigationMenuList .navigationMenuListItem a,
+a:hover,
+a:visited,
+a:active,
+a:link {
+	color: inherit;
+	text-decoration: none;
+	position: relative;
+}
+
+.navigationMenu.showMenu .navigationMenuList .navigationMenuLink::before {
+	content: "";
+	background-color: c.$mars-rock-purple;
+	position: absolute;
+	left: 0;
+	bottom: 3px;
+	width: 100%;
+	height: 8px;
+	z-index: -1;
+	border-radius: 4px;
+	transition: all 0.3s ease-in-out;
+}
+
+.navigationMenu.showMenu .navigationMenuList .navigationMenuLink:hover::before {
+	bottom: 0;
+	height: 100%;
+}
+
+.navigationMenu.showMenu .navigationMenuList .navigationMenuListItem {
+	margin: 20px 0;
+}
+
+// .navigationMenuShowMenu .navigationMenuList li:first-child {
+// 	margin-top: 7rem;
+// }

@@ -7,13 +7,17 @@ export default function NavigationMenu({
 		<nav className={`navigationMenu ${hamburgerMenuOpen ? "showMenu" : ""}`}>
 			<ul className="navigationMenuList">
                 <li className="navigationMenuListItem">
-                    <Link href="/BlackScholes" title="Black Scholes Calculator" className="navigationMenuLink">📈 Black Scholes</Link>
+                    <Link href="/blackscholes" title="Black Scholes Calculator">
+                        <a className="navigationMenuLink">📈 Black Scholes Calc</a>
+                    </Link>
                 </li>
 
 
 
                 <li className="navigationMenuListItem">
-                    <Link href="/About" title="About" className="navigationMenuLink">❔ About</Link>
+                    <Link href="/about" title="About">
+                        <a className="navigationMenuLink">❔ About</a>
+                    </Link>
                 </li>
             </ul>
 		</nav>

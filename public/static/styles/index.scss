@@ -1,0 +1,32 @@
+@use "utilities/constants" as c;
+@use "utilities/fonts";
+@use "topBar";
+@use "button";
+@use "navigationMenu";
+@use "indexBody";
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: black;
+	// background-image: url("../images/mars.png");
+	// background-repeat: no-repeat;
+	// background-position: center top;
+	// background-size: 100% 100%;
+}
+
+html {
+    height: 100%
+}
+
+// @media (max-width: 1500px) {
+// 	.IndexApp #marsBackground {
+// 		min-width: 1500px !important;
+// 	}
+// }
+
+// @media (max-height: 500px) {
+// 	.IndexApp #marsBackground {
+// 		min-height: 500px !important;
+// 	}
+// }
