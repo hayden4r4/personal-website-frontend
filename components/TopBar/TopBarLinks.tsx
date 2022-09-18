@@ -11,7 +11,9 @@ import LinkedInIcon from "../../public/static/icons/LinkedIn.png";
 import HomeIcon from "../../public/static/icons/Home.png";
 import Porfolio from "../../public/static/icons/Portfolio.png";
 
-export default function TopBarLinks() {
+import * as PropTypes from "../Utilities/PropTypes"
+
+export default function TopBarLinks({ headerShadowColor }: PropTypes.TopBarProps) {
 	var [hamburgerMenuOpen, setHamburgerMenuState] = useState(false);
 	var hamburgerMenuImg = hamburgerMenuOpen ? (
 		<Image
@@ -97,7 +99,7 @@ export default function TopBarLinks() {
 					/>
 				</a>
 			</Link>
-			<div className="topBarHeader" style={{ textShadow: textShadowGenerator(0, 0.1, 0.0025) }}>
+			<div className="topBarHeader" style={{ textShadow: textShadowGenerator(0, 0.1, 0.0025, headerShadowColor) }}>
 				<p id="header">Hayden Rose</p>
 			</div>
 		</div>

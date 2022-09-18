@@ -1,9 +1,11 @@
 import TopBarLinks from "./TopBarLinks";
 
-export default function TopBar() {
+import * as PropTypes from "../Utilities/PropTypes"
+
+export default function TopBar({ headerShadowColor }: PropTypes.TopBarProps) {
 	return (
 		<div className="topBarDiv">
-			<TopBarLinks />
+			<TopBarLinks headerShadowColor={ headerShadowColor } />
 		</div>
 	);
 }
