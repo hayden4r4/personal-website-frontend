@@ -3,7 +3,7 @@ import Head from "next/head";
 import BlackScholesCalc from "../components/BlackScholes/BlackScholesCalc";
 import TopBar from "../components/TopBar/TopBar";
 
-import styles from "../../public/static/styles/utilities/_constants.module.scss";
+import styles from "../public/static/styles/utilities/_constants.module.scss";
 
 export default function BlackScholes() {
 	return (

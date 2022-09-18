@@ -3,7 +3,7 @@ import Head from "next/head";
 import TopBar from "../components/TopBar/TopBar";
 import IndexBody from "../components/Index/IndexBody";
 
-import styles from "../../public/static/styles/utilities/_constants.module.scss";
+import styles from "../public/static/styles/utilities/_constants.module.scss";
 
 export default function IndexApp() {
 	return (
