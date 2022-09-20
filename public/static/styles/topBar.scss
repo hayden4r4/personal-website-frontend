@@ -26,6 +26,12 @@
 	padding-top: 5px;
 }
 
+// Grow menu button on hover
+.topBarDiv .topBarHamburgerMenu:hover {
+	transform: scale(1.1);
+	transition: all ease 500ms;
+}
+
 .topBarDiv .topBarHamburgerMenu #topBarHamburgerOpen {
 	padding-top: 2.5px;
 	padding-left: 3px;
@@ -45,6 +51,31 @@
 	cursor: pointer;
 }
 
+// Underline on hover : start
+.topBarDiv .topBarLinksIcon:after {
+	background: none repeat scroll 0 0 transparent;
+	bottom: -0.25px;
+	content: "";
+	display: block;
+	height: 2px;
+	left: 50%;
+	position: absolute;
+	background: #fff;
+	transition: width 0.3s ease 0s, left 0.3s ease 0s;
+	width: 0;
+}
+
+.topBarDiv .topBarLinksIcon:hover:after {
+	width: 100%;
+	left: 0;
+}
+
+.topBarDiv .topBarLinksIcon:hover {
+	transform: scale(1.1);
+	transition: all ease 500ms;
+}
+// Underline on hover : end
+
 .topBarDiv .topBarLinks.showMenu {
 	transition: all 0.2s linear;
 	margin-left: c.$navigaton-bar-width + 10px;
@@ -59,8 +90,35 @@
 	font-size: 1.8em;
 	// margin-top: $topBarMarginTop;
 	padding-top: 1.8px;
-	text-shadow: 2px 2px c.$mars-pink, 3px 3px c.$mars-pink, 4px 4px c.$mars-pink;
+
+	transition: 1s;
 }
+
+// Header Underline : start
+.topBarDiv .topBarHeader #header:after {
+	background: none repeat scroll 0 0 transparent;
+	bottom: -7px;
+	content: "";
+	display: block;
+	height: 3px;
+	left: 50%;
+	position: absolute;
+	background: c.$mars-pink;
+	transition: width 0.3s ease 0s, left 0.3s ease 0s;
+	width: 0;
+}
+
+.topBarDiv .topBarHeader #header:hover:after {
+	width: 100%;
+	left: 0;
+}
+
+.topBarDiv .topBarHeader #header:hover {
+	transform: scale(1.1);
+	transition: all ease 500ms;
+}
+
+// Header Underline : end
 
 @media only screen and (max-width: 475px) {
 	.topBarDiv .topBarLinks .topBarHeader {
