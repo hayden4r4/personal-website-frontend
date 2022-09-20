@@ -18,7 +18,8 @@
 	transition: width 0.4s linear;
 	transition-delay: 0.1s;
 	top: 0;
-	background-color: c.$mars-pink;
+	// background-color: rgba(0, 0, 0, 0.653);
+	background-color: c.$mars-pink-transparent;
 	left: 0;
 	bottom: 0;
 	height: 100vh;
@@ -26,10 +27,11 @@
 	overflow: hidden;
 	max-width: c.$navigaton-bar-width;
 	z-index: 9;
+	box-shadow: 0px 0px 40px 5px black;
 }
 
 .navigationMenu.showMenu .navigationMenuList {
-	font-family: "Space Grotesk SemiBold";
+	font-family: "Space Grotesk Bold";
 	color: c.$off-white;
 	font-size: 1.5em;
 	list-style: none;
@@ -37,6 +39,7 @@
 	padding: 30px 20px;
 	text-decoration: none;
 	white-space: nowrap;
+	text-align: left;
 }
 
 .navigationMenu.showMenu .navigationMenuList .navigationMenuListItem a,
@@ -49,23 +52,50 @@ a:link {
 	position: relative;
 }
 
-.navigationMenu.showMenu .navigationMenuList .navigationMenuLink::before {
+.navigationMenu.showMenu .navigationMenuList .navigationMenuLink:after {
+	background: none repeat scroll 0 0 transparent;
+	bottom: -4px;
 	content: "";
-	background-color: c.$mars-rock-purple;
+	display: block;
+	height: 3px;
+	left: 50%;
 	position: absolute;
-	left: 0;
-	bottom: 3px;
-	width: 100%;
-	height: 8px;
-	z-index: -1;
-	border-radius: 4px;
-	transition: all 0.3s ease-in-out;
+	background: white;
+	transition: width 0.3s ease 0s, left 0.3s ease 0s;
+	width: 0;
+	opacity: 50%;
 }
 
-.navigationMenu.showMenu .navigationMenuList .navigationMenuLink:hover::before {
-	bottom: 0;
-	height: 100%;
+.navigationMenu.showMenu .navigationMenuList .navigationMenuLink:hover:after {
+	width: 100%;
+	left: 0;
 }
+
+.navigationMenu.showMenu .navigationMenuList .navigationMenuListItem:hover {
+	transform: scale(1.05);
+	transition: all ease 500ms;
+}
+
+
+// Text hover underline fill up : start
+// .navigationMenu.showMenu .navigationMenuList .navigationMenuLink::before {
+// 	content: "";
+// 	background-color: c.$mars-rock-purple;
+// 	position: absolute;
+// 	left: 0;
+// 	bottom: 3px;
+// 	width: 100%;
+// 	height: 8px;
+// 	z-index: -1;
+// 	border-radius: 4px;
+// 	transition: all 0.3s ease-in-out;
+// }
+
+// .navigationMenu.showMenu .navigationMenuList .navigationMenuLink:hover::before {
+// 	bottom: 0;
+// 	height: 100%;
+// }
+// Text hover underline fill up : end
 
 .navigationMenu.showMenu .navigationMenuList .navigationMenuListItem {
 	margin: 20px 0;
