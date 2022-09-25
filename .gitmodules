@@ -1,0 +1,4 @@
+[submodule "wasm/blackscholes"]
+	path = wasm/blackscholes
+	url = https://github.com/hayden4r4/blackscholes-rust.git
+	branch = wasm
