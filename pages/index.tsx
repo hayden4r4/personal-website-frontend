@@ -1,7 +1,10 @@
-import Image from "next/image";
+import Image from "next/future/image";
 import Head from "next/head";
 import TopBar from "../components/TopBar/TopBar";
 import IndexBody from "../components/Index/IndexBody";
+import Footer from "../components/Footer/Footer";
+
+import Mars from "../public/static/images/mars.png";
 
 import styles from "../public/static/styles/utilities/_constants.module.scss";
 
@@ -14,18 +17,20 @@ export default function IndexApp() {
 				<meta name="darkreader-lock" />
 				<meta name="color-scheme" content="light" />
 			</Head>
-			<Image
-				priority
-				src="/static/images/mars.png"
-				unoptimized={true}
-				quality={100}
-				alt="Mars Background"
-				layout="fill"
-				objectFit="cover"
-				id="marsBackground"
-			/>
+			<div id="indexBackgroundImage">
+				<Image
+					priority
+					src={Mars}
+					unoptimized={true}
+					quality={100}
+					alt="Mars Background"
+					sizes="100vw"
+					className="marsBackground"
+				/>
+			</div>
 			<TopBar headerShadowColor={styles.marsPink} />
 			<IndexBody />
+			<Footer />
 		</div>
 	);
 }

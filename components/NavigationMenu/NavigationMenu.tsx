@@ -1,8 +1,10 @@
 import Link from "next/link";
 
+import * as PropTypes from "../Utilities/PropTypes";
+
 export default function NavigationMenu({
 	hamburgerMenuOpen,
-}: NavigationMenuProps) {
+}: PropTypes.NavigationMenuProps) {
 	return (
 		<nav className={`navigationMenu ${hamburgerMenuOpen ? "showMenu" : ""}`}>
 			<ul className="navigationMenuList">
@@ -29,6 +31,4 @@ export default function NavigationMenu({
 	);
 }
 
-type NavigationMenuProps = {
-	hamburgerMenuOpen: boolean;
-};
+
