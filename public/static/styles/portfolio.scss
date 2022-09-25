@@ -13,7 +13,7 @@
 }
 
 #porfolioView {
-    background-image: url("../images/mars.png");
+    background-image: url("../images/mars-blue.png");
     background-repeat: no-repeat;
     background-position: center top;
     background-size: cover;
@@ -25,6 +25,10 @@
 
 #portfolioApp .navigationMenu, #portfolioApp .navigationMenu.showMenu {
     background-color: c.$light-blue-transparent;
+}
+
+#portfolioApp #topBarHeading p:after {
+	background: c.$light-blue;
 }
 
 body {

@@ -16,7 +16,7 @@ export default function Portfolio() {
 				<meta name="color-scheme" content="light" />
 			</Head>
 			<div id="porfolioView">
-				<TopBar headerShadowColor={styles.lightBlue} />
+				<TopBar headerShadowColor={styles.lightBlueSecondary} />
 				<PortfolioBody />
 			</div>
 			<Footer />
