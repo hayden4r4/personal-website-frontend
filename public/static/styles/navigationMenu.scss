@@ -2,12 +2,12 @@
 @use "utilities/fonts";
 
 .navigationMenu {
-	position: fixed;
+	position: absolute;
 	overflow-y: scroll;
 	list-style: none;
 	top: 0;
 	left: 0;
-	bottom: 0;
+	bottom: 200px;
 	width: 0;
 	height: 100vh;
 	overflow: hidden;
@@ -18,10 +18,11 @@
 	.navigationMenuList {
 		font-family: "Space Grotesk Bold";
 		color: c.$off-white;
-		font-size: 1.5em;
+		font-size: 2em;
 		list-style: none;
 		display: block;
-		padding: 30px 20px;
+		padding: 0px 20px;
+		margin-top: -10px;
 		text-decoration: none;
 		white-space: nowrap;
 		text-align: left;
@@ -45,14 +46,13 @@
 .navigationMenu.showMenu {
 	overflow-y: scroll;
 	list-style: none;
-	position: fixed;
+	position: absolute;
 	transition: width 0.2s linear;
 	transition-delay: 0.1s;
 	top: 0;
 	// background-color: rgba(0, 0, 0, 0.653);
 	background-color: c.$mars-pink-transparent;
 	left: 0;
-	bottom: 0;
 	height: 100vh;
 	width: c.$navigaton-bar-width;
 	overflow: hidden;
@@ -64,10 +64,11 @@
 .navigationMenu.showMenu .navigationMenuList {
 	font-family: "Space Grotesk Bold";
 	color: c.$off-white;
-	font-size: 1.5em;
+	font-size: 2em;
 	list-style: none;
 	display: block;
-	padding: 30px 20px;
+	padding: 0px 20px;
+	margin-top: -10px;
 	text-decoration: none;
 	white-space: nowrap;
 	text-align: left;

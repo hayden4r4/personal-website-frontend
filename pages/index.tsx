@@ -1,6 +1,7 @@
 import Image from "next/future/image";
 import Head from "next/head";
 import TopBar from "../components/TopBar/TopBar";
+import NavigationMenu from "../components/NavigationMenu/NavigationMenu";
 import IndexBody from "../components/Index/IndexBody";
 import Footer from "../components/Footer/Footer";
 

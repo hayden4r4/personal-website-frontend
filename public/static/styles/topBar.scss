@@ -1,16 +1,25 @@
 @use "utilities/constants" as c;
 @use "utilities/fonts";
 
-#topBarHeader {
+#topBar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	color: white;
+	height: 100px;
+	width: 100%;
+	z-index: 10;
+}
+
+.topBarHeader,
+.topBarHeader.showMenu {
 	// background-color: c.$light-pink;
 	height: 32px;
-	top: 0;
+	padding-top: 100px;
 	font-family: "Space Grotesk";
 	font-size: 1.1em;
 	color: c.$off-white;
-	// border-radius: 10px;
 	padding-top: 8px;
-	position: fixed;
 	width: 100%;
 	z-index: 10;
 	-webkit-touch-callout: none; /* iOS Safari */
@@ -21,30 +30,32 @@
 	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
-#topBarHeader #topBarList {
+#topBarList {
 	list-style: none;
 	z-index: 10;
 }
 
-// #topBarHeader #topBarList .topBarListItem {
+//  #topBarList .topBarListItem {
 // 	display: inline;
 // }
 
-#topBarHeader #topBarHamburgerMenu {
+#topBarHamburgerMenu {
 	background-color: transparent;
 	cursor: pointer;
 	padding-top: 5px;
 	z-index: 10;
+	min-width: 25px;
+	min-height: 25px;
 }
 
 // Grow menu button on hover
-#topBarHeader #topBarHamburgerMenu:hover {
+#topBarHamburgerMenu:hover {
 	transform: scale(1.1);
 	transition: all ease 500ms;
 	will-change: transform;
 }
 
-#topBarHeader #topBarList {
+#topBarList {
 	display: flex;
 	align-items: center;
 	column-gap: 1.75rem;
@@ -54,13 +65,13 @@
 	z-index: 10;
 }
 
-#topBarHeader #topBarList .topBarListItem {
+#topBarList .topBarListItem {
 	padding-top: 6.25px;
 	cursor: pointer;
 }
 
 // Underline on hover : start
-#topBarHeader #topBarList .topBarListItem:after {
+#topBarList .topBarListItem:after {
 	background: none repeat scroll 0 0 transparent;
 	bottom: -0.25px;
 	content: "";
@@ -78,19 +89,19 @@
 	will-change: transform, opacity;
 }
 
-#topBarHeader #topBarList .topBarListItem:not(#topBarHamburgerMenu):hover:after {
+#topBarList .topBarListItem:not(#topBarHamburgerMenu):hover:after {
 	transform: scale(1);
 	will-change: transform, opacity;
 }
 
-#topBarHeader #topBarList .topBarListItem:hover {
+#topBarList .topBarListItem:hover {
 	transform: scale(1.1);
 	transition: all ease 300ms;
 	will-change: transform;
 }
 // Underline on hover : end
 
-#topBarHeader #topBarList.showMenu {
+#topBarList.showMenu {
 	transition: all 0.2s linear;
 	margin-left: c.$navigaton-bar-width + 10px;
 	z-index: 10;
@@ -100,7 +111,7 @@
 	}
 }
 
-#topBarHeader #topBarHeading {
+#topBarHeading {
 	font-family: "Space Grotesk Bold";
 	position: absolute;
 	// top: 2px;
@@ -114,7 +125,7 @@
 }
 
 // Heading Underline : start
-#topBarHeader #topBarHeading p:after {
+#topBarHeading p:after {
 	background: none repeat scroll 0 0 transparent;
 	bottom: -7px;
 	content: "";
@@ -132,12 +143,12 @@
 	will-change: transform, opacity;
 }
 
-#topBarHeader #topBarHeading p:hover:after {
+#topBarHeading p:hover:after {
 	transform: scale(1);
 	will-change: transform, opacity;
 }
 
-#topBarHeader #topBarHeading p:hover {
+#topBarHeading p:hover {
 	transform: scale(1.1);
 	transition: all ease 500ms;
 	will-change: transform;
@@ -145,26 +156,26 @@
 
 // Heading Underline : end
 
-@media only screen and (max-width: 475px) {
-	#topBarHeader #topBarList #topBarHeading {
+@media only screen and (max-width: 580px) {
+	#topBarList #topBarHeading {
 		display: none;
 	}
 }
 
-@media only screen and (max-width: 275px) {
-	#topBarHeader #topBarList .topBarListIcon {
+@media only screen and (max-width: 350px) {
+	#topBarList .topBarListIcon {
 		display: none;
 	}
 }
 
-@media only screen and (max-width: 785px) {
-	#topBarHeader #topBarList.showMenu #topBarHeading {
+@media only screen and (max-width: 885px) {
+	#topBarList.showMenu #topBarHeading {
 		display: none;
 	}
 }
 
-@media only screen and (max-width: 550px) {
-	#topBarHeader #topBarList.showMenu .topBarListIcon {
+@media only screen and (max-width: 660px) {
+	#topBarList.showMenu .topBarListIcon {
 		display: none;
 	}
 }
