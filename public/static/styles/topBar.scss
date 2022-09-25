@@ -2,7 +2,7 @@
 @use "utilities/fonts";
 
 #topBar {
-	position: fixed;
+	// position: fixed;
 	top: 0;
 	width: 100%;
 	color: white;
@@ -11,9 +11,15 @@
 	z-index: 10;
 }
 
+.topBarHeader {
+	left: 0;
+}
+
 .topBarHeader,
 .topBarHeader.showMenu {
 	// background-color: c.$light-pink;
+	position: fixed;
+	top: 0;
 	height: 32px;
 	padding-top: 100px;
 	font-family: "Space Grotesk";
@@ -28,16 +34,19 @@
 	-moz-user-select: none; /* Old versions of Firefox */
 	-ms-user-select: none; /* Internet Explorer/Edge */
 	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+	transition: left 0.2s linear, width 0s linear 0s, right 0s linear 0s;
+	right: 0;
+	max-width: 100%;
 }
 
-#topBarList {
-	list-style: none;
-	z-index: 10;
-}
+.topBarHeader.showMenu {
+	left: c.$navigaton-bar-width;
 
-//  #topBarList .topBarListItem {
-// 	display: inline;
-// }
+	// width: calc(100% - c.$navigaton-bar-width);
+	#topBarList {
+		margin-left: 10px;
+	}
+}
 
 #topBarHamburgerMenu {
 	background-color: transparent;
@@ -62,6 +71,7 @@
 	height: 40px;
 	margin-left: 1%;
 	transition: all 0.2s ease-out;
+	list-style: none;
 	z-index: 10;
 }
 
@@ -113,9 +123,9 @@
 
 #topBarHeading {
 	font-family: "Space Grotesk Bold";
-	position: absolute;
+	position: fixed;
 	// top: 2px;
-	right: 2.5%;
+	right: 25px;
 	white-space: nowrap;
 	font-size: 1.8em;
 	// margin-top: $topBarMarginTop;
