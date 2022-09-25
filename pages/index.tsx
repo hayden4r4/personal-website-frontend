@@ -1,7 +1,6 @@
 import Image from "next/future/image";
 import Head from "next/head";
 import TopBar from "../components/TopBar/TopBar";
-import NavigationMenu from "../components/NavigationMenu/NavigationMenu";
 import IndexBody from "../components/Index/IndexBody";
 import Footer from "../components/Footer/Footer";
 
@@ -18,8 +17,8 @@ export default function IndexApp() {
 				<meta name="darkreader-lock" />
 				<meta name="color-scheme" content="light" />
 			</Head>
-			<div id="indexBackgroundImage">
-				<Image
+			<div className="indexView">
+				{/* <Image
 					priority
 					src={Mars}
 					unoptimized={true}
@@ -27,10 +26,11 @@ export default function IndexApp() {
 					alt="Mars Background"
 					sizes="100vw"
 					className="marsBackground"
-				/>
+				/> */}
+			
+				<TopBar headerShadowColor={styles.marsPink} />
+				<IndexBody />
 			</div>
-			<TopBar headerShadowColor={styles.marsPink} />
-			<IndexBody />
 			<Footer />
 		</div>
 	);

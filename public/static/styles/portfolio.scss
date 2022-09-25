@@ -3,3 +3,30 @@
 @use "utilities/fonts";
 @use "topBar";
 @use "button";
+
+
+#portfolioApp {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+#porfolioView {
+    background-image: url("../images/mars.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: -10;
+}
+
+#portfolioApp .navigationMenu, #portfolioApp .navigationMenu.showMenu {
+    background-color: c.$light-blue-transparent;
+}
+
+body {
+    background-color: black;
+}
