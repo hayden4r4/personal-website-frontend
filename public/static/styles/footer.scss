@@ -7,7 +7,52 @@
     bottom: 0px;
     height: c.$footer-height;
     width: 100%;
-    background-color: #121111;
+    background-color: c.$footer-black;
     font-family: "Space Grotesk";
     color: white;
+}
+
+#footerContent {
+    font-size: 1rem;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+#footerContent #footerMainText {
+    position: relative;
+    top: 12px;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    text-align: center;
+    height: max-content;
+    width: max-content;
+}
+
+#footerContent #footerName {
+    font-family: "Space Grotesk Bold";
+    font-size: 1.25rem;
+    margin-bottom: 2px;
+}
+
+#footerContent #footerEmail {
+    width: max-content;
+}
+
+#footerContent #footerLicense {
+    display: flex;
+    font-size: 0.7rem;
+    align-items: right;
+    justify-content: right;
+    margin-top: 0px;
+    margin-right: 10px;
+}
+
+#footerContent #footerPageSourceLink {
+    display: flex;
+    font-size: 0.9rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    margin-right: 10px;
 }
