@@ -9,7 +9,7 @@ export default function BlackScholes() {
 	return (
 		<div>
 			<Head>
-				<title>BlackScholes Calc - Hayden Rose</title>
+				<title>Option Pricer - Hayden Rose</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 				<meta name="darkreader-lock" />
 				<meta name="color-scheme" content="light" />

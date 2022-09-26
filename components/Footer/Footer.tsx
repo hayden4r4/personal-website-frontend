@@ -13,11 +13,11 @@ export default function Footer() {
                         <a id="footerPageSourceLink">View this page on GitHub ↗</a>
                     </Link>
                 </span>
-				<Link href="https://github.com/hayden4r4/personal_website_frontend_nextjs/blob/master/LICENSE.md">
+				{/* <Link href="https://github.com/hayden4r4/personal_website_frontend_nextjs/blob/master/LICENSE.md">
 					<a id="footerLicense">
-						Licensed Under the GPLv3 License
+						Licensed Under GPLv3 License
 					</a>
-				</Link>
+				</Link> */}
 			</div>
 		</div>
 	);

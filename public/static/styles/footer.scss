@@ -39,6 +39,15 @@
     width: max-content;
 }
 
+#footerContent #footerPageSourceLink {
+    display: flex;
+    font-size: 0.9rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    margin-right: 10px;
+}
+
 #footerContent #footerLicense {
     display: flex;
     font-size: 0.7rem;
@@ -48,11 +57,8 @@
     margin-right: 10px;
 }
 
-#footerContent #footerPageSourceLink {
-    display: flex;
-    font-size: 0.9rem;
-    align-items: center;
-    justify-content: center;
-    margin-top: 12px;
-    margin-right: 10px;
+@media only screen and (max-width: 650px) {
+	#footerContent #footerLicense {
+		display: none;
+	}
 }
