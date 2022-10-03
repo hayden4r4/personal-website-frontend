@@ -4,33 +4,86 @@
 @use "topBar";
 @use "button";
 
-
 #portfolioApp {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: -1;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: -1;
 }
 
 #porfolioView {
-    background-image: url("../images/mars-blue.png");
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: -10;
+	background-image: url("../images/mars-blue.png");
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+	position: relative;
+	// top: calc(-1 * c.$top-bar-height);
+	// top: 0;
 }
 
-#portfolioApp .navigationMenu, #portfolioApp .navigationMenu.showMenu {
-    background-color: c.$light-blue-transparent;
+#portfolioApp .navigationMenu,
+#portfolioApp .navigationMenu.showMenu {
+	background-color: c.$light-blue-transparent;
 }
 
 #portfolioApp #topBarHeading p:after {
 	background: c.$light-blue;
 }
 
+#portfolioApp #portfolioBody {
+	z-index: 1;
+	padding-top: c.$top-bar-height;
+	height: calc(100% - c.$top-bar-height);
+}
+
+#portfolioApp #portfolioBody #portfolioGridHeader {
+	text-align: center;
+	font-size: 4rem;
+	font-family: "Space Grotesk Bold";
+	color: white;
+	padding-top: 2.5%;
+}
+
+#portfolioApp #portfolioBody #portfolioGrid {
+	padding-top: 50px;
+	z-index: 1;
+	margin: auto;
+	align-items: center;
+	justify-content: center;
+	font-family: "Space Grotesk";
+	color: white;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	column-gap: 25%;
+	flex-wrap: wrap;
+	flex-flow: row wrap;
+	row-gap: 50px;
+	text-align: center;
+}
+
+#portfolioApp #portfolioBody #portfolioGrid .portfolioGridItem {
+	// background-color: c.$footer-black-transparent;
+	background: linear-gradient(
+		to bottom,
+		c.$projects-header-black 42px,
+		c.$footer-black-transparent 45px
+	);
+	border-radius: 8px;
+	padding: 1%;
+	grid-template-rows: 1fr 1fr 1fr;
+	align-items: center;
+	justify-items: center;
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+#portfolioApp #portfolioBody #portfolioGrid .porfolioGridProjectName {
+	font-family: "Space Grotesk SemiBold";
+	font-size: 1.5rem;
+}
+
 body {
-    background-color: black;
+	background-color: black;
 }

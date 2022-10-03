@@ -2,63 +2,60 @@
 @use "utilities/fonts";
 
 #footer {
-    position: relative;
-    // top: -4px;
-    bottom: 0px;
-    height: c.$footer-height;
-    width: 100%;
-    background-color: c.$footer-black;
-    font-family: "Space Grotesk";
-    color: white;
+	position: relative;
+	bottom: 0px;
+    margin-bottom: -10px;
+	height: c.$footer-height;
+	width: 100%;
+	background-color: c.$footer-black;
+	font-family: "Space Grotesk";
+	color: white;
 }
 
 #footerContent {
-    font-size: 1rem;
-    text-align: center;
-    height: 100%;
-    width: 100%;
+	font-size: 1rem;
+	height: 100%;
+	width: 100%;
 }
 
 #footerContent #footerMainText {
-    position: relative;
-    top: 12px;
-    transform: translateY(-50%);
-    font-size: 1rem;
-    text-align: center;
-    height: max-content;
-    width: max-content;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: max-content;
+	margin: auto;
+	padding-top: 10px;
 }
 
 #footerContent #footerName {
-    font-family: "Space Grotesk Bold";
-    font-size: 1.25rem;
-    margin-bottom: 2px;
-}
-
-#footerContent #footerEmail {
-    width: max-content;
+	font-family: "Space Grotesk Bold";
+	font-size: 1.25rem;
+    padding-bottom: 2px;
 }
 
 #footerContent #footerPageSourceLink {
-    display: flex;
-    font-size: 0.9rem;
-    align-items: center;
-    justify-content: center;
-    margin-top: 12px;
-    margin-right: 10px;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+	padding-top: 20px;
 }
 
 #footerContent #footerLicense {
-    display: flex;
-    font-size: 0.7rem;
-    align-items: right;
-    justify-content: right;
-    margin-top: 0px;
-    margin-right: 10px;
+	display: flex;
+	font-size: 0.7rem;
+	align-items: right;
+	justify-content: right;
+	margin-top: 0px;
+	margin-right: 10px;
 }
 
-@media only screen and (max-width: 650px) {
-	#footerContent #footerLicense {
+@media only screen and (max-width: 250px) {
+	#footerContent #footerMainText {
 		display: none;
 	}
 }

@@ -10,7 +10,7 @@ export default function Footer() {
                         <a id="footerEmail">haydenrose@hayden-rose.com</a>
                     </Link>
                     <Link href="https://github.com/hayden4r4/personal_website_frontend_nextjs/tree/master">
-                        <a id="footerPageSourceLink">View this page on GitHub ↗</a>
+                        <a id="footerPageSourceLink">View this site on GitHub ↗</a>
                     </Link>
                 </span>
 				{/* <Link href="https://github.com/hayden4r4/personal_website_frontend_nextjs/blob/master/LICENSE.md">

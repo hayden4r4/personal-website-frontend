@@ -17,7 +17,7 @@ export default function Portfolio() {
 			</Head>
 			<div id="porfolioView">
 				<TopBar headerShadowColor={styles.lightBlueSecondary} />
-				<PortfolioBody />
+				<PortfolioBody headerShadowColor={styles.lightBlueSecondary}/>
 			</div>
 			<Footer />
 		</div>
