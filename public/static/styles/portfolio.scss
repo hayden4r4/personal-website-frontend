@@ -11,16 +11,53 @@
 	z-index: -1;
 }
 
+@-webkit-keyframes blur {
+	0% {
+		-webkit-filter: blur(5px);
+		filter: blur(5px);
+	}
+	100% {
+		-webkit-filter: blur(0px);
+		filter: blur(0px);
+	}
+}
+@-moz-keyframes blur {
+	0% {
+		-moz-filter: blur(5px);
+		filter: blur(5px);
+	}
+	100% {
+		-moz-filter: blur(0px);
+		filter: blur(0px);
+	}
+}
+@keyframes blur {
+	0% {
+		-webkit-filter: blur(5px);
+		-moz-filter: blur(5px);
+		filter: blur(5px);
+	}
+	100% {
+		-webkit-filter: blur(0px);
+		-moz-filter: blur(0px);
+		filter: blur(0px);
+	}
+}
+
 #porfolioView {
 	background-image: url("../images/mars-blue.png");
 	background-repeat: no-repeat;
 	background-position: center top;
 	background-size: cover;
 	height: 100%;
+	min-height: 1000px;
 	width: 100%;
 	position: relative;
 	// top: calc(-1 * c.$top-bar-height);
 	// top: 0;
+	// animation: 0.8s linear 0s 1 blur;
+	// -webkit-animation: 0.8s linear 0s 1 blur;
+	// -moz-animation: 0.8s linear 0s 1 blur;
 }
 
 #portfolioApp .navigationMenu,
@@ -46,6 +83,46 @@
 	padding-top: 2.5%;
 }
 
+@keyframes slideInFromBottom {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+@-webkit-keyframes slideInFromBottom {
+	0% {
+		-webkit-transform: translateY(100%);
+		transform: translateY(100%);
+	}
+	100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+
+@-moz-keyframes slideInFromBottom {
+	0% {
+		-moz-transform: translateY(100%);
+		transform: translateY(100%);
+	}
+	100% {
+		-moz-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInAnimation {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 #portfolioApp #portfolioBody #portfolioGrid {
 	padding-top: 50px;
 	z-index: 1;
@@ -57,31 +134,67 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	column-gap: 25%;
+	column-gap: 10%;
 	flex-wrap: wrap;
 	flex-flow: row wrap;
 	row-gap: 50px;
 	text-align: center;
+	animation: 1.25s ease-in-out 0s 1 slideInFromBottom;
+	-webkit-animation: 1.25s ease-in-out 0s 1 slideInFromBottom;
+	-moz-animation: 1.25s ease-in-out 0s 1 slideInFromBottom;
 }
 
 #portfolioApp #portfolioBody #portfolioGrid .portfolioGridItem {
 	// background-color: c.$footer-black-transparent;
-	background: linear-gradient(
-		to bottom,
-		c.$projects-header-black 42px,
-		c.$footer-black-transparent 45px
-	);
+	// background: linear-gradient(
+	// 	to bottom,
+	// 	c.$projects-header-black 40%,
+	// 	c.$footer-black-transparent 42%
+	// );
+	background-color: c.$footer-black-transparent;
 	border-radius: 8px;
 	padding: 1%;
 	grid-template-rows: 1fr 1fr 1fr;
 	align-items: center;
 	justify-items: center;
 	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+	max-width: 25%;
+	min-width: 400px;
+	cursor: pointer;
+	transition: 0.3s;
 }
 
-#portfolioApp #portfolioBody #portfolioGrid .porfolioGridProjectName {
+#portfolioApp #portfolioBody #portfolioGrid .portfolioGridItem:hover {
+	transform: scale(1.015);
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
+}
+
+#portfolioApp
+	#portfolioBody
+	#portfolioGrid
+	.portfolioGridItem
+	.portfolioGridProjectName {
+	font-family: "Space Grotesk Bold";
+	font-size: 1.75rem;
+}
+
+#portfolioApp
+	#portfolioBody
+	#portfolioGrid
+	.portfolioGridItem
+	.portfolioGridLangDate {
 	font-family: "Space Grotesk SemiBold";
-	font-size: 1.5rem;
+	font-size: 1.2rem;
+	font-weight: 400;
+}
+
+#portfolioApp
+	#portfolioBody
+	#portfolioGrid
+	.portfolioGridItem
+	.portfolioGridProjectDescription {
+	padding-top: 25px;
+	font-size: 1rem;
 }
 
 body {
