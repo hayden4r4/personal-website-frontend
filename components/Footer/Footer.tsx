@@ -9,7 +9,7 @@ export default function Footer() {
                     <Link href="mailto:haydenrose@hayden-rose.com">
                         <a id="footerEmail">haydenrose@hayden-rose.com</a>
                     </Link>
-                    <Link href="https://github.com/hayden4r4/personal_website_frontend_nextjs/tree/master">
+                    <Link href="https://github.com/hayden4r4/personal-website-frontend">
                         <a id="footerPageSourceLink">View this site on GitHub ↗</a>
                     </Link>
                 </span>
