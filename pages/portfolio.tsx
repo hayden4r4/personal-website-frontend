@@ -15,7 +15,7 @@ export default function Portfolio() {
 				<meta name="darkreader-lock" />
 				<meta name="color-scheme" content="light" />
 			</Head>
-			<div id="porfolioView">
+			<div id="portfolioView">
 				<TopBar headerShadowColor={styles.lightBlueSecondary} />
 				<PortfolioBody headerShadowColor={styles.lightBlueSecondary}/>
 			</div>
