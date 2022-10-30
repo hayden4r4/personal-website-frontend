@@ -1,0 +1,51 @@
+@use "main";
+@use "utilities/animations";
+@use "utilities/constants" as c;
+@use "utilities/fonts";
+@use "topBar";
+@use "button";
+
+#blackScholesApp {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: -1;
+}
+
+#blackScholesView {
+	background-image: url("../images/mars-yellow.png");
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+	position: relative;
+	// top: calc(-1 * c.$top-bar-height);
+	// top: 0;
+	// animation: 0.8s linear 0s 1 blur;
+	// -webkit-animation: 0.8s linear 0s 1 blur;
+	// -moz-animation: 0.8s linear 0s 1 blur;
+}
+
+#blackScholesApp .navigationMenu,
+#blackScholesApp .navigationMenu.showMenu {
+	background-color: c.$yellow-transparent;
+}
+
+#blackScholesApp #topBarHeading p:after {
+	background: c.$yellow;
+}
+
+#blackScholesApp #blackScholesBody {
+	z-index: 1;
+	padding-top: c.$top-bar-height;
+	height: calc(100% - c.$top-bar-height);
+}
+
+#blackScholesApp #blackScholesBody #blackScholesHeader {
+	text-align: center;
+	font-size: 4rem;
+	font-family: "Space Grotesk Bold";
+	color: white;
+	padding-top: 2.5%;
+}
