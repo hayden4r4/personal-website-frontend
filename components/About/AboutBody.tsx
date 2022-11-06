@@ -1,4 +1,3 @@
-import styles from "../../public/static/styles/utilities/_constants.module.scss";
 import textShadowGenerator from "../Utilities/TextEffects";
 import * as PropTypes from "../Utilities/PropTypes";
 
@@ -10,7 +9,7 @@ export default function AboutBody({
 			<h1
 				id="aboutHeader"
 				style={{
-					textShadow: textShadowGenerator(0, 0.1, 0.0025, styles.purple),
+					textShadow: textShadowGenerator(0, 0.1, 0.0025, headerShadowColor),
 				}}
 			>
 				About this site

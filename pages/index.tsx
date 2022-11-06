@@ -29,7 +29,7 @@ export default function IndexApp() {
 				/> */}
 			
 				<TopBar headerShadowColor={styles.marsPink} />
-				<IndexBody />
+				<IndexBody headerShadowColor={styles.marsPink}/>
 			</div>
 			<Footer />
 		</div>

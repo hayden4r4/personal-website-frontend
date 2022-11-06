@@ -32,36 +32,101 @@ export default function BlackScholesBody({
 }: PropTypes.TopBarProps) {
 	return (
 		<div id="blackScholesBody">
-			<h1 id="blackScholesHeader">Black Scholes Calculator</h1>
+			<h1
+				id="blackScholesHeader"
+				style={{
+					textShadow: textShadowGenerator(0, 0.1, 0.0025, headerShadowColor),
+				}}
+			>
+				Black Scholes Calculator
+			</h1>
 			<form id="blackScholesForm">
-				<label className="blackScholesFormLabel" htmlFor="calcType">Calculation Type</label>
+				<label className="blackScholesFormLabel" htmlFor="calcType">
+					Calculation Type
+				</label>
 				<select name="calcType" className="blackScholesFormInput dropdown">
 					<option value="price">Price</option>
 					<option value="greeks">Greeks</option>
 					<option value="volatility">Volatility (IV%)</option>
 				</select>
-				<label className="blackScholesFormLabel" htmlFor="optionType">Option Type</label>
+				<label className="blackScholesFormLabel" htmlFor="optionType">
+					Option Type
+				</label>
 				<select name="calcType" className="blackScholesFormInput dropdown">
 					<option value="call">Call</option>
 					<option value="put">Put</option>
 				</select>
 
-				<label className="blackScholesFormLabel" htmlFor="strikePrice">Strike Price</label>
-				<input className="blackScholesFormInput" type="number" id="strikePrice" name="strikePrice" />
-				<label className="blackScholesFormLabel" htmlFor="securityPrice">Security Price</label>
-				<input className="blackScholesFormInput" type="number" id="securityPrice" name="securityPrice" />
-				<label className="blackScholesFormLabel" htmlFor="rfRate">Risk-Free Rate %</label>
-				<input className="blackScholesFormInput" type="number" id="rfRate" name="rfRate" />
-				<label className="blackScholesFormLabel" htmlFor="volatility">Volatility %</label>
-				<input className="blackScholesFormInput" type="number" id="volatility" name="volatility" />
-				<label className="blackScholesFormLabel" htmlFor="timeToMaturity">Time to Maturity (Years)</label>
-				<input className="blackScholesFormInput" type="number" id="timeToMaturity" name="timeToMaturity" />
-				<label className="blackScholesFormLabel" htmlFor="dividendYield">Dividend Yield %</label>
-				<input className="blackScholesFormInput" type="number" id="dividendYield" name="dividendYield" />
-				<label className="blackScholesFormLabel" htmlFor="optionPrice">Option Price</label>
-				<input className="blackScholesFormInput" type="number" id="optionPrice" name="optionPrice" />
+				<label className="blackScholesFormLabel" htmlFor="strikePrice">
+					Strike Price
+				</label>
+				<input
+					className="blackScholesFormInput"
+					type="number"
+					id="strikePrice"
+					name="strikePrice"
+				/>
+				<label className="blackScholesFormLabel" htmlFor="securityPrice">
+					Security Price
+				</label>
+				<input
+					className="blackScholesFormInput"
+					type="number"
+					id="securityPrice"
+					name="securityPrice"
+				/>
+				<label className="blackScholesFormLabel" htmlFor="rfRate">
+					Risk-Free Rate %
+				</label>
+				<input
+					className="blackScholesFormInput"
+					type="number"
+					id="rfRate"
+					name="rfRate"
+				/>
+				<label className="blackScholesFormLabel" htmlFor="volatility">
+					Volatility %
+				</label>
+				<input
+					className="blackScholesFormInput"
+					type="number"
+					id="volatility"
+					name="volatility"
+				/>
+				<label className="blackScholesFormLabel" htmlFor="timeToMaturity">
+					Time to Maturity (Years)
+				</label>
+				<input
+					className="blackScholesFormInput"
+					type="number"
+					id="timeToMaturity"
+					name="timeToMaturity"
+				/>
+				<label className="blackScholesFormLabel" htmlFor="dividendYield">
+					Dividend Yield %
+				</label>
+				<input
+					className="blackScholesFormInput"
+					type="number"
+					id="dividendYield"
+					name="dividendYield"
+				/>
+				<label className="blackScholesFormLabel" htmlFor="optionPrice">
+					Option Price
+				</label>
+				<input
+					className="blackScholesFormInput"
+					type="number"
+					id="optionPrice"
+					name="optionPrice"
+				/>
 				<br></br>
-				<input className="blackScholesFormInput" type="submit" id= "blackScholesFormCalculate" value="Calculate" />
+				<input
+					className="blackScholesFormInput"
+					type="submit"
+					id="blackScholesFormCalculate"
+					value="Calculate"
+				/>
 			</form>
 		</div>
 	);
