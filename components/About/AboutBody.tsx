@@ -15,8 +15,11 @@ export default function AboutBody({
 				About this site
 			</h1>
 			<p id="aboutBodyText">
-				This site is built using Next.js, SCSS, and Rust WASM. Currently this is
-				a static site but I plan to eventually build a backend for it as well.  This site is hosted on Netlify with domain hosting by Cloudflare.  The main intentions for this site are to show off my portfolio while also gaining experience with web development. Thanks for visiting!
+				This site is built using Next.js, SASS, and Rust WASM. Currently this is
+				a static site but I plan to eventually build a backend for it as well.
+				This site is hosted on Netlify with domain hosting by Cloudflare. The
+				main intentions for this site are to show off my portfolio while also
+				gaining experience with web development. Thanks for visiting!
 			</p>
 		</div>
 	);
