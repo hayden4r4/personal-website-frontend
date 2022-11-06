@@ -39,6 +39,7 @@
 	z-index: 1;
 	padding-top: c.$top-bar-height;
 	height: calc(100% - c.$top-bar-height);
+	overflow-y: auto;
 }
 
 #blackScholesApp #blackScholesBody #blackScholesHeader {
@@ -53,20 +54,21 @@
 #blackScholesApp #blackScholesBody #blackScholesForm {
 	font-size: 1.2rem;
 	display: grid;
-    grid-template-columns: max-content max-content;
-    grid-row-gap: 15px;
+	grid-template-columns: max-content max-content;
+	grid-row-gap: 15px;
 	grid-column-gap: 15px;
 	// align the grid
 	justify-content: center;
 	align-items: center;
 	background-color: c.$footer-black-transparent;
 	width: max-content;
+	max-width: 95%;
 	padding: 2.5%;
 	margin: auto;
 	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
 	border-radius: 10px;
+	margin-bottom: 1.5%;
 }
-
 
 #blackScholesApp #blackScholesBody #blackScholesForm .blackScholesFormLabel {
 	color: white;
@@ -87,30 +89,70 @@
 	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
 }
 
-#blackScholesApp #blackScholesBody #blackScholesForm .blackScholesFormInput:focus {
+#blackScholesApp
+	#blackScholesBody
+	#blackScholesForm
+	.blackScholesFormInput:focus {
 	outline: none !important;
 	border-bottom: 3px solid white;
 	transition: all 0.05s linear;
 	box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
 }
 
-#blackScholesApp #blackScholesBody #blackScholesForm #blackScholesFormCalculate:hover, .blackScholesFormInput.dropdown:hover {
+#blackScholesApp
+	#blackScholesBody
+	#blackScholesForm
+	#blackScholesFormCalculate:hover,
+.blackScholesFormInput.dropdown:hover {
 	border-bottom: 3px solid white;
 	transition: all 0.05s linear;
 	box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
 	cursor: pointer;
 }
 
-// Disables Spinners (up and down arrows) on number input fields
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-	appearance: none;
-    margin: 0;
+#blackScholesApp #blackScholesBody #blackScholesResult {
+	font-size: 1.5rem;
+	display: grid;
+	grid-template-columns: max-content max-content;
+	grid-row-gap: 15px;
+	grid-column-gap: 15px;
+	color: white;
+	font-family: "Space Grotesk Bold";
+	justify-content: center;
+	align-items: center;
+	background-color: c.$footer-black-transparent;
+	width: max-content;
+	padding: 0 2.5% 0 2.5%;
+	margin: auto;
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+	margin-bottom: 30px;
+	max-width: 95%;
 }
 
-input[type=number] {
-    -moz-appearance: textfield;
+#blackScholesApp #blackScholesBody #blackScholesResult #blackScholesResultList {
+	list-style-type: none;
+	font-family: "Space Grotesk SemiBold";
+	font-size: 1.5rem;
+}
+
+#blackScholesApp
+	#blackScholesBody
+	#blackScholesResult
+	#blackScholesResultListItem {
+	margin: 10px 0;
+}
+
+// Disables Spinners (up and down arrows) on number input fields
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
 	appearance: textfield;
 }
 // end of disabling spinners
