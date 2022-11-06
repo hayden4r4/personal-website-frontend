@@ -6,6 +6,13 @@ import '../public/static/styles/blackscholes.scss';
 
 import { AppProps } from 'next/app';
 
+import { GoogleAnalytics } from "nextjs-google-analytics";
+
 export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <>
+    <GoogleAnalytics trackPageViews />
+      <Component {...pageProps} />
+    </>
+  );
 }

@@ -9,6 +9,7 @@ import Mars from "../public/static/images/mars.png";
 import styles from "../public/static/styles/utilities/_constants.module.scss";
 
 export default function IndexApp() {
+
 	return (
 		<div className="IndexApp">
 			<Head>

@@ -12,6 +12,7 @@
     "@types/jquery": "^3.5.14",
     "blackscholes": "file:wasm/blackscholes/pkg",
     "next": "12.3.0",
+    "nextjs-google-analytics": "^2.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.54.9"

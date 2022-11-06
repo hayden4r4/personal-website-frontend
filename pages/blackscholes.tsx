@@ -8,6 +8,7 @@ import Footer from "../components/Footer/Footer";
 import styles from "../public/static/styles/utilities/_constants.module.scss";
 
 export default function BlackScholes() {
+
 	return (
 		<div id="blackScholesApp">
 			<Head>

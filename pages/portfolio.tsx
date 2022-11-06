@@ -7,6 +7,7 @@ import Footer from "../components/Footer/Footer";
 import styles from "../public/static/styles/utilities/_constants.module.scss";
 
 export default function Portfolio() {
+
 	return (
 		<div id="portfolioApp">
 			<Head>
@@ -15,6 +16,7 @@ export default function Portfolio() {
 				<meta name="darkreader-lock" />
 				<meta name="color-scheme" content="light" />
 			</Head>
+			
 			<div id="portfolioView">
 				<TopBar headerShadowColor={styles.lightBlueSecondary} />
 				<PortfolioBody headerShadowColor={styles.lightBlueSecondary}/>

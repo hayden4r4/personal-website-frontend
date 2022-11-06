@@ -7,6 +7,7 @@ import Footer from "../components/Footer/Footer";
 import styles from "../public/static/styles/utilities/_constants.module.scss";
 
 export default function About() {
+
 	return (
 		<div id="aboutApp">
 			<Head>
@@ -15,9 +16,10 @@ export default function About() {
 				<meta name="darkreader-lock" />
 				<meta name="color-scheme" content="light" />
 			</Head>
+
 			<div id="aboutView">
 				<TopBar headerShadowColor={styles.purple} />
-				<AboutBody headerShadowColor={styles.purple}/>
+				<AboutBody headerShadowColor={styles.purple} />
 			</div>
 			<Footer />
 		</div>
