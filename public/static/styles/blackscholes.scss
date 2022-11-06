@@ -3,7 +3,6 @@
 @use "utilities/constants" as c;
 @use "utilities/fonts";
 @use "topBar";
-@use "button";
 
 #blackScholesApp {
 	height: 100%;
@@ -48,4 +47,70 @@
 	font-family: "Space Grotesk Bold";
 	color: white;
 	padding-top: 2.5%;
+	padding-bottom: 2.5%;
 }
+
+#blackScholesApp #blackScholesBody #blackScholesForm {
+	font-size: 1.2rem;
+	display: grid;
+    grid-template-columns: max-content max-content;
+    grid-row-gap: 15px;
+	grid-column-gap: 15px;
+	// align the grid
+	justify-content: center;
+	align-items: center;
+	background-color: c.$footer-black-transparent;
+	width: max-content;
+	padding: 2.5%;
+	margin: auto;
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+}
+
+
+#blackScholesApp #blackScholesBody #blackScholesForm .blackScholesFormLabel {
+	color: white;
+	font-family: "Space Grotesk SemiBold";
+	text-align: right;
+}
+
+#blackScholesApp #blackScholesBody #blackScholesForm .blackScholesFormInput {
+	background-color: c.$footer-black;
+	border-bottom: 1px solid white;
+	color: white;
+	font-family: "Space Grotesk";
+	width: 100%;
+	border-radius: 3px;
+	text-align: center;
+	height: 1.5rem;
+	transition: all 0.05s linear;
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+#blackScholesApp #blackScholesBody #blackScholesForm .blackScholesFormInput:focus {
+	outline: none !important;
+	border-bottom: 3px solid white;
+	transition: all 0.05s linear;
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
+}
+
+#blackScholesApp #blackScholesBody #blackScholesForm #blackScholesFormCalculate:hover, .blackScholesFormInput.dropdown:hover {
+	border-bottom: 3px solid white;
+	transition: all 0.05s linear;
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
+	cursor: pointer;
+}
+
+// Disables Spinners (up and down arrows) on number input fields
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+	appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+	appearance: textfield;
+}
+// end of disabling spinners

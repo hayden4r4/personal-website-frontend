@@ -11,7 +11,7 @@ export default function IndexBody() {
 						textShadow: textShadowGenerator(0, 0.1, 0.0025, styles.marsPink),
 					}}
 				>
-					Please hire me
+					Welcome!
 				</h1>
 			</div>
 		</div>

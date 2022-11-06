@@ -3,7 +3,6 @@
 @use "utilities/constants" as c;
 @use "utilities/fonts";
 @use "topBar";
-@use "button";
 
 #aboutApp {
 	height: 100%;
@@ -43,4 +42,18 @@
 	font-family: "Space Grotesk Bold";
 	color: white;
 	padding-top: 2.5%;
+	padding-bottom: 5%;
+}
+
+#aboutApp #aboutBody #aboutBodyText {
+	text-align: center;
+	font-size: 1.2rem;
+	font-family: "Space Grotesk";
+	color: white;
+	width: 70%;
+	margin: auto;
+	background-color: c.$footer-black-transparent;
+	border-radius: 10px;
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+	padding: 2.5%;
 }
