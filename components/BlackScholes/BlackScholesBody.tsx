@@ -3,19 +3,15 @@ import { useState, FormEvent } from "react";
 
 import textShadowGenerator from "../Utilities/TextEffects";
 import * as PropTypes from "../Utilities/PropTypes";
+import * as blackscholes from "blackscholes";
 
 export default function BlackScholesBody({
 	headerShadowColor,
 }: PropTypes.TopBarProps) {
 	const [selectedCalcType, setSelectedCalcType] = useState("price_greeks");
-	const [blackScholesResult, setBlackScholesResult] = useState("");
 
 	function handleSelectedCalcType(event: any) {
 		setSelectedCalcType(event.target.value);
-	}
-
-	function handleBlackScholesResult(value: string) {
-		setBlackScholesResult(value);
 	}
 
 	function showFields(calcType: string) {
@@ -60,59 +56,108 @@ export default function BlackScholesBody({
 		}
 	}
 
-	const handleSubmit = async (event: FormEvent) => {
+	type Result = {
+		calcType: string;
+		result: ResultPriceGreeks | ResultVolatility;
+	};
+
+	type ResultPriceGreeks = {
+		optionPrice: number;
+		delta: number;
+		gamma: number;
+		theta: number;
+		vega: number;
+		rho: number;
+		[key: string]: any;
+	};
+
+	type ResultVolatility = {
+		volatility: number;
+		[key: string]: any;
+	};
+
+	const [blackScholesResult, setBlackScholesResult] = useState({} as Result);
+
+	const HandleSubmit = (event: FormEvent) => {
 		event.preventDefault();
 		const form = event.target as HTMLFormElement;
 
-		var data = {
-			calcType: form.calcType.value as string,
-			optionType: form.optionType.value as string,
-			s: form.securityPrice.value as number,
-			k: form.strikePrice.value as number,
-			p: 0,
-			r: form.rfRate.value as number / 100.0,
-			q: form.dividendYield.value as number / 100.0,
-			t: form.timeToMaturity.value as number / 365.25,
-			sigma: 0,
-		};
+		const optionType =
+			form.optionType.value === "call"
+				? blackscholes.OptionType.Call
+				: blackscholes.OptionType.Put;
 
-		switch (form.calcType.value) {
+		var inputs: blackscholes.Inputs = new blackscholes.Inputs(
+			optionType,
+			form.securityPrice.value as number,
+			form.strikePrice.value as number,
+			undefined,
+			(form.rfRate.value as number) / 100.0,
+			(form.dividendYield.value as number) / 100.0,
+			(form.timeToMaturity.value as number) / 365.25,
+			undefined
+		);
+
+		const calcType: string = form.calcType.value;
+
+		switch (calcType) {
 			case "price_greeks":
-				data.sigma = form.volatility.value as number / 100;
-				break
+				inputs.sigma = (form.volatility.value as number) / 100;
+				const resultPriceGreeks: ResultPriceGreeks = {
+					optionPrice: blackscholes.Price.calc_price(inputs),
+					delta: blackscholes.Greeks.calc_delta(inputs),
+					gamma: blackscholes.Greeks.calc_gamma(inputs),
+					theta: blackscholes.Greeks.calc_theta(inputs),
+					vega: blackscholes.Greeks.calc_vega(inputs),
+					rho: blackscholes.Greeks.calc_rho(inputs),
+				};
+				const result: Result = {
+					calcType: calcType,
+					result: resultPriceGreeks,
+				};
+				setBlackScholesResult(result);
+				break;
 			case "volatility":
-				data.p = form.optionPrice.value as number;
-				break
+				inputs.p = form.optionPrice.value as number;
+				const resultVolatility: ResultVolatility = {
+					volatility: blackscholes.Volatility.calc_iv(inputs, 0.0001) * 100,
+				};
+				const result2: Result = {
+					calcType: calcType,
+					result: resultVolatility,
+				};
+				setBlackScholesResult(result2);
+				break;
 		}
-
-		const response = await fetch("/api/blackScholes", {
-			body: JSON.stringify(data),
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method: "POST",
-		});
-
-		const result = await response.json();
-		handleBlackScholesResult(result.data);
 	};
 
 	function getBlackScholesResult() {
-		if (blackScholesResult === "") {
+		if (blackScholesResult === ({} as Result)) {
 			return <></>;
 		} else {
-			const bsResultJson = JSON.parse(blackScholesResult)
-			switch (bsResultJson.calcType) {
+			switch (blackScholesResult.calcType) {
 				case "price_greeks":
 					return (
 						<>
 							<ul id="blackScholesResultList">
-								<li id="blackScholesResultListItem">Option Price: {bsResultJson.result.optionPrice}</li>
-								<li id="blackScholesResultListItem">Delta: {bsResultJson.result.delta}</li>
-								<li id="blackScholesResultListItem">Gamma: {bsResultJson.result.gamma}</li>
-								<li id="blackScholesResultListItem">Theta: {bsResultJson.result.theta}</li>
-								<li id="blackScholesResultListItem">Vega: {bsResultJson.result.vega}</li>
-								<li id="blackScholesResultListItem">Rho: {bsResultJson.result.rho}</li>
+								<li id="blackScholesResultListItem">
+									Option Price: {blackScholesResult.result.optionPrice}
+								</li>
+								<li id="blackScholesResultListItem">
+									Delta: {blackScholesResult.result.delta}
+								</li>
+								<li id="blackScholesResultListItem">
+									Gamma: {blackScholesResult.result.gamma}
+								</li>
+								<li id="blackScholesResultListItem">
+									Theta: {blackScholesResult.result.theta}
+								</li>
+								<li id="blackScholesResultListItem">
+									Vega: {blackScholesResult.result.vega}
+								</li>
+								<li id="blackScholesResultListItem">
+									Rho: {blackScholesResult.result.rho}
+								</li>
 							</ul>
 						</>
 					);
@@ -120,7 +165,9 @@ export default function BlackScholesBody({
 					return (
 						<>
 							<ul id="blackScholesResultList">
-								<li id="blackScholesResultListItem">Volatility: {bsResultJson.result.volatility}</li>
+								<li id="blackScholesResultListItem">
+									Volatility: {blackScholesResult.result.volatility}%
+								</li>
 							</ul>
 						</>
 					);
@@ -138,7 +185,7 @@ export default function BlackScholesBody({
 			>
 				Black Scholes Calculator
 			</h1>
-			<form id="blackScholesForm" onSubmit={handleSubmit}>
+			<form id="blackScholesForm" onSubmit={HandleSubmit}>
 				<label className="blackScholesFormLabel" htmlFor="calcType">
 					Calculation Type
 				</label>
@@ -234,9 +281,7 @@ export default function BlackScholesBody({
 					value="Calculate"
 				/>
 			</form>
-			<div id="blackScholesResult">
-				{getBlackScholesResult()}
-			</div>
+			<div id="blackScholesResult">{getBlackScholesResult()}</div>
 		</div>
 	);
 }

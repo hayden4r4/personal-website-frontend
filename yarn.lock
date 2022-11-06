@@ -8950,7 +8950,7 @@
   "resolved" "https://registry.npmjs.org/nested-error-stacks/-/nested-error-stacks-2.1.1.tgz"
   "version" "2.1.1"
 
-"netlify-cli@^12.0.11":
+"netlify-cli@^12.1.0":
   "integrity" "sha512-r2vpxP0EoVbX4BHaT4gbaUOhuBEFO+pQAme8AlC7NIH+XLcqhAqDuiJkGddM2Bugd1Wr6a4JbZbn6+4/0IKmlA=="
   "resolved" "https://registry.npmjs.org/netlify-cli/-/netlify-cli-12.1.0.tgz"
   "version" "12.1.0"
