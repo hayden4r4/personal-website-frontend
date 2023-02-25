@@ -7,7 +7,10 @@ export default function NavigationMenu({
 	hamburgerMenuRef,
 }: PropTypes.NavigationMenuProps) {
 	return (
-		<nav ref={hamburgerMenuRef} className={`navigationMenu ${hamburgerMenuOpen ? "showMenu" : ""}`}>
+		<nav
+			ref={hamburgerMenuRef}
+			className={`navigationMenu ${hamburgerMenuOpen ? "showMenu" : ""}`}
+		>
 			<ul className="navigationMenuList">
 				<li className="navigationMenuListItem">
 					<Link href="/blackscholes" title="Black Scholes Calculator">
@@ -15,7 +18,7 @@ export default function NavigationMenu({
 							className="navigationMenuLink"
 							title="Option Pricer using Black-Scholes"
 						>
-							Option Pricer
+							Option Calculator
 						</a>
 					</Link>
 				</li>
@@ -31,5 +34,3 @@ export default function NavigationMenu({
 		</nav>
 	);
 }
-
-

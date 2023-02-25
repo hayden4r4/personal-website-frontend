@@ -8,34 +8,63 @@ import * as blackscholes from "blackscholes";
 export default function BlackScholesBody({
 	headerShadowColor,
 }: PropTypes.TopBarProps) {
-	const [selectedCalcType, setSelectedCalcType] = useState("price_greeks");
+	const FormulaType = Object.freeze({
+		BlackScholes: 0,
+		Black76: 1,
+	});
 
-	function handleSelectedCalcType(event: any) {
-		setSelectedCalcType(event.target.value);
-	}
-
-	function showFields(calcType: string) {
-		switch (calcType) {
-			case "price_greeks":
+	function showFormulaTypeFields(formulaType: any) {
+		switch (+formulaType) {
+			case FormulaType.BlackScholes:
 				return (
 					<>
-						<label className="blackScholesFormLabel" htmlFor="volatility">
-							Volatility %
+						<label className="blackScholesFormLabel" htmlFor="dividendYield">
+							Dividend Yield %
 						</label>
 						<input
 							className="blackScholesFormInput"
 							type="number"
-							id="volatility"
-							name="volatility"
+							id="dividendYield"
+							name="dividendYield"
 							pattern="^[+-]?(\d*|\d{1,3}(,\d{3})*)(\.\d+)?\b$"
-							title="Must be a numerical volatility value as %"
+							title="Must be a numerical dividend yield as %"
 							step="any"
 							required
 						/>
 					</>
 				);
 
-			case "volatility":
+			// case FormulaType.Black76:
+		}
+	}
+
+	const CalcType = Object.freeze({
+		PriceGreeks: 0,
+		Volatility: 1,
+	});
+
+	function showCalcTypeFields(calcType: any) {
+		switch (+calcType) {
+			case CalcType.PriceGreeks:
+				return (
+					<>
+						<label className="blackScholesFormLabel" htmlFor="Volatility">
+							Volatility %
+						</label>
+						<input
+							className="blackScholesFormInput"
+							type="number"
+							id="Volatility"
+							name="Volatility"
+							pattern="^[+-]?(\d*|\d{1,3}(,\d{3})*)(\.\d+)?\b$"
+							title="Must be a numerical Volatility value as %"
+							step="any"
+							required
+						/>
+					</>
+				);
+
+			case CalcType.Volatility:
 				return (
 					<>
 						<label className="blackScholesFormLabel" htmlFor="optionPrice">
@@ -56,6 +85,22 @@ export default function BlackScholesBody({
 		}
 	}
 
+	const [selectedFormulaType, setSelectedFormulaType] = useState(
+		FormulaType.BlackScholes
+	);
+
+	const [selectedCalcType, setSelectedCalcType] = useState(
+		CalcType.PriceGreeks
+	);
+
+	function handleFormulaType(event: any) {
+		setSelectedFormulaType(event.target.value);
+	}
+
+	function handleCalcType(event: any) {
+		setSelectedCalcType(event.target.value);
+	}
+
 	type Result = {
 		calcType: string;
 		result: ResultPriceGreeks | ResultVolatility;
@@ -72,7 +117,7 @@ export default function BlackScholesBody({
 	};
 
 	type ResultVolatility = {
-		volatility: number;
+		Volatility: number;
 		[key: string]: any;
 	};
 
@@ -101,8 +146,8 @@ export default function BlackScholesBody({
 		const calcType: string = form.calcType.value;
 
 		switch (calcType) {
-			case "price_greeks":
-				inputs.sigma = (form.volatility.value as number) / 100;
+			case "PriceGreeks":
+				inputs.sigma = (form.Volatility.value as number) / 100;
 				const resultPriceGreeks: ResultPriceGreeks = {
 					optionPrice: blackscholes.Price.calc_price(inputs),
 					delta: blackscholes.Greeks.calc_delta(inputs),
@@ -117,10 +162,10 @@ export default function BlackScholesBody({
 				};
 				setBlackScholesResult(result);
 				break;
-			case "volatility":
+			case "Volatility":
 				inputs.p = form.optionPrice.value as number;
 				const resultVolatility: ResultVolatility = {
-					volatility: blackscholes.Volatility.calc_iv(inputs, 0.0001) * 100,
+					Volatility: blackscholes.Volatility.calc_iv(inputs, 0.0001) * 100,
 				};
 				const result2: Result = {
 					calcType: calcType,
@@ -136,7 +181,7 @@ export default function BlackScholesBody({
 			return <></>;
 		} else {
 			switch (blackScholesResult.calcType) {
-				case "price_greeks":
+				case "PriceGreeks":
 					return (
 						<>
 							<ul id="blackScholesResultList">
@@ -161,12 +206,12 @@ export default function BlackScholesBody({
 							</ul>
 						</>
 					);
-				case "volatility":
+				case "Volatility":
 					return (
 						<>
 							<ul id="blackScholesResultList">
 								<li id="blackScholesResultListItem">
-									Volatility: {blackScholesResult.result.volatility}%
+									Volatility: {blackScholesResult.result.Volatility}%
 								</li>
 							</ul>
 						</>
@@ -183,9 +228,21 @@ export default function BlackScholesBody({
 					textShadow: textShadowGenerator(0, 0.1, 0.0025, headerShadowColor),
 				}}
 			>
-				Black Scholes Calculator
+				Option Calculator
 			</h1>
 			<form id="blackScholesForm" onSubmit={HandleSubmit}>
+				{/* <label className="blackScholesFormLabel" htmlFor="FormulaType">
+					Formula
+				</label>
+				<select
+					name="FormulaType"
+					className="blackScholesFormInput dropdown"
+					value={selectedFormulaType}
+					onChange={handleFormulaType}
+				>
+					<option value={FormulaType.BlackScholes}>Black Scholes</option>
+					<option value={FormulaType.Black76}>Black 76</option>
+				</select> */}
 				<label className="blackScholesFormLabel" htmlFor="calcType">
 					Calculation Type
 				</label>
@@ -193,10 +250,10 @@ export default function BlackScholesBody({
 					name="calcType"
 					className="blackScholesFormInput dropdown"
 					value={selectedCalcType}
-					onChange={handleSelectedCalcType}
+					onChange={handleCalcType}
 				>
-					<option value="price_greeks">Option Price & Greeks</option>
-					<option value="volatility">Volatility (IV%)</option>
+					<option value={CalcType.PriceGreeks}>Option Price & Greeks</option>
+					<option value={CalcType.Volatility}>Volatility (IV%)</option>
 				</select>
 				<label className="blackScholesFormLabel" htmlFor="optionType">
 					Option Type
@@ -232,7 +289,7 @@ export default function BlackScholesBody({
 					required
 				/>
 
-				{showFields(selectedCalcType)}
+				{showCalcTypeFields(selectedCalcType)}
 
 				<label className="blackScholesFormLabel" htmlFor="rfRate">
 					Risk-Free Rate %
@@ -260,19 +317,9 @@ export default function BlackScholesBody({
 					step="any"
 					required
 				/>
-				<label className="blackScholesFormLabel" htmlFor="dividendYield">
-					Dividend Yield %
-				</label>
-				<input
-					className="blackScholesFormInput"
-					type="number"
-					id="dividendYield"
-					name="dividendYield"
-					pattern="^[+-]?(\d*|\d{1,3}(,\d{3})*)(\.\d+)?\b$"
-					title="Must be a numerical dividend yield as %"
-					step="any"
-					required
-				/>
+
+				{showFormulaTypeFields(selectedFormulaType)}
+
 				<br></br>
 				<input
 					className="blackScholesFormInput"

@@ -48,14 +48,16 @@ export default function TopBar({ headerShadowColor }: PropTypes.TopBarProps) {
 			 */
 			function handleClickOutside(event: any) {
 				if (ref.current && !ref.current.contains(event.target)) {
-					setHamburgerMenuState(hamburgerMenuOpen=false);
+					setHamburgerMenuState((hamburgerMenuOpen = false));
 				}
 			}
 			// Bind the event listener
 			document.addEventListener("mousedown", handleClickOutside);
+			document.addEventListener("touchstart", handleClickOutside);
 			return () => {
 				// Unbind the event listener on clean up
 				document.removeEventListener("mousedown", handleClickOutside);
+				document.removeEventListener("touchstart", handleClickOutside);
 			};
 		}, [ref]);
 	}
@@ -64,7 +66,10 @@ export default function TopBar({ headerShadowColor }: PropTypes.TopBarProps) {
 
 	return (
 		<div id="topBar">
-			<NavigationMenu hamburgerMenuOpen={hamburgerMenuOpen} hamburgerMenuRef={hamburgerMenuRef} />
+			<NavigationMenu
+				hamburgerMenuOpen={hamburgerMenuOpen}
+				hamburgerMenuRef={hamburgerMenuRef}
+			/>
 			<header className={`topBarHeader ${hamburgerMenuOpen ? "showMenu" : ""}`}>
 				<nav>
 					<ul
