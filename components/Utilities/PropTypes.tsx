@@ -4,4 +4,5 @@ export type TopBarProps = {
 
 export type NavigationMenuProps = {
 	hamburgerMenuOpen: boolean;
+	hamburgerMenuRef: React.MutableRefObject<null>
 };

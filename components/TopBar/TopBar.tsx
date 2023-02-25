@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import NavigationMenu from "../NavigationMenu/NavigationMenu";
@@ -39,9 +39,32 @@ export default function TopBar({ headerShadowColor }: PropTypes.TopBarProps) {
 		setHamburgerMenuState(!hamburgerMenuOpen);
 	};
 
+	const hamburgerMenuRef = useRef(null);
+
+	function useOutsideAlerter(ref: any) {
+		useEffect(() => {
+			/**
+			 * Alert if clicked on outside of element
+			 */
+			function handleClickOutside(event: any) {
+				if (ref.current && !ref.current.contains(event.target)) {
+					setHamburgerMenuState(hamburgerMenuOpen=false);
+				}
+			}
+			// Bind the event listener
+			document.addEventListener("mousedown", handleClickOutside);
+			return () => {
+				// Unbind the event listener on clean up
+				document.removeEventListener("mousedown", handleClickOutside);
+			};
+		}, [ref]);
+	}
+
+	useOutsideAlerter(hamburgerMenuRef);
+
 	return (
 		<div id="topBar">
-			<NavigationMenu hamburgerMenuOpen={hamburgerMenuOpen} />
+			<NavigationMenu hamburgerMenuOpen={hamburgerMenuOpen} hamburgerMenuRef={hamburgerMenuRef} />
 			<header className={`topBarHeader ${hamburgerMenuOpen ? "showMenu" : ""}`}>
 				<nav>
 					<ul
@@ -59,7 +82,12 @@ export default function TopBar({ headerShadowColor }: PropTypes.TopBarProps) {
 						<li className="topBarListItem" title="Home" id="topBarHomeIcon">
 							<Link href="/">
 								<a className="topBarListIcon">
-									<Image src={HomeIcon} alt="Home Icon" width={25} height={25} />
+									<Image
+										src={HomeIcon}
+										alt="Home Icon"
+										width={25}
+										height={25}
+									/>
 								</a>
 							</Link>
 						</li>

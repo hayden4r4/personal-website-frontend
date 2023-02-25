@@ -4,9 +4,10 @@ import * as PropTypes from "../Utilities/PropTypes";
 
 export default function NavigationMenu({
 	hamburgerMenuOpen,
+	hamburgerMenuRef,
 }: PropTypes.NavigationMenuProps) {
 	return (
-		<nav className={`navigationMenu ${hamburgerMenuOpen ? "showMenu" : ""}`}>
+		<nav ref={hamburgerMenuRef} className={`navigationMenu ${hamburgerMenuOpen ? "showMenu" : ""}`}>
 			<ul className="navigationMenuList">
 				<li className="navigationMenuListItem">
 					<Link href="/blackscholes" title="Black Scholes Calculator">
