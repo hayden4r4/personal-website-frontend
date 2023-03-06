@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { useState, FormEvent } from "react";
 
 import textShadowGenerator from "../Utilities/TextEffects";
 import * as PropTypes from "../Utilities/PropTypes";
-import * as blackscholes from "blackscholes";
+import * as blackscholes from "@haydenr4/blackscholes_wasm";
 
 export default function BlackScholesBody({
 	headerShadowColor,
@@ -102,22 +101,18 @@ export default function BlackScholesBody({
 	}
 
 	type Result = {
-		calcType: string;
+		calcType: number;
 		result: ResultPriceGreeks | ResultVolatility;
 	};
 
 	type ResultPriceGreeks = {
 		optionPrice: number;
-		delta: number;
-		gamma: number;
-		theta: number;
-		vega: number;
-		rho: number;
+		greeks: any;
 		[key: string]: any;
 	};
 
 	type ResultVolatility = {
-		Volatility: number;
+		volatility: number;
 		[key: string]: any;
 	};
 
@@ -143,18 +138,14 @@ export default function BlackScholesBody({
 			undefined
 		);
 
-		const calcType: string = form.calcType.value;
+		const calcType: number = Number(form.calcType.value);
 
 		switch (calcType) {
-			case "PriceGreeks":
+			case CalcType.PriceGreeks:
 				inputs.sigma = (form.Volatility.value as number) / 100;
 				const resultPriceGreeks: ResultPriceGreeks = {
-					optionPrice: blackscholes.Price.calc_price(inputs),
-					delta: blackscholes.Greeks.calc_delta(inputs),
-					gamma: blackscholes.Greeks.calc_gamma(inputs),
-					theta: blackscholes.Greeks.calc_theta(inputs),
-					vega: blackscholes.Greeks.calc_vega(inputs),
-					rho: blackscholes.Greeks.calc_rho(inputs),
+					optionPrice: inputs.calc_price(),
+					greeks: JSON.parse(inputs.calc_all_greeks()),
 				};
 				const result: Result = {
 					calcType: calcType,
@@ -162,10 +153,11 @@ export default function BlackScholesBody({
 				};
 				setBlackScholesResult(result);
 				break;
-			case "Volatility":
+
+			case CalcType.Volatility:
 				inputs.p = form.optionPrice.value as number;
 				const resultVolatility: ResultVolatility = {
-					Volatility: blackscholes.Volatility.calc_iv(inputs, 0.0001) * 100,
+					volatility: inputs.calc_iv(0.0001) * 100,
 				};
 				const result2: Result = {
 					calcType: calcType,
@@ -181,7 +173,7 @@ export default function BlackScholesBody({
 			return <></>;
 		} else {
 			switch (blackScholesResult.calcType) {
-				case "PriceGreeks":
+				case CalcType.PriceGreeks:
 					return (
 						<>
 							<ul id="blackScholesResultList">
@@ -189,29 +181,65 @@ export default function BlackScholesBody({
 									Option Price: {blackScholesResult.result.optionPrice}
 								</li>
 								<li id="blackScholesResultListItem">
-									Delta: {blackScholesResult.result.delta}
+									Delta: {blackScholesResult.result.greeks.delta}
 								</li>
 								<li id="blackScholesResultListItem">
-									Gamma: {blackScholesResult.result.gamma}
+									Gamma: {blackScholesResult.result.greeks.gamma}
 								</li>
 								<li id="blackScholesResultListItem">
-									Theta: {blackScholesResult.result.theta}
+									Theta: {blackScholesResult.result.greeks.theta}
 								</li>
 								<li id="blackScholesResultListItem">
-									Vega: {blackScholesResult.result.vega}
+									Vega: {blackScholesResult.result.greeks.vega}
 								</li>
 								<li id="blackScholesResultListItem">
-									Rho: {blackScholesResult.result.rho}
+									Rho: {blackScholesResult.result.greeks.rho}
+								</li>
+								<li id="blackScholesResultListItem">
+									Epsilon: {blackScholesResult.result.greeks.epsilon}
+								</li>
+								<li id="blackScholesResultListItem">
+									Lambda: {blackScholesResult.result.greeks.lambda}
+								</li>
+								<li id="blackScholesResultListItem">
+									Vanna: {blackScholesResult.result.greeks.vanna}
+								</li>
+								<li id="blackScholesResultListItem">
+									Charm: {blackScholesResult.result.greeks.charm}
+								</li>
+								<li id="blackScholesResultListItem">
+									Veta: {blackScholesResult.result.greeks.veta}
+								</li>
+								<li id="blackScholesResultListItem">
+									Vomma: {blackScholesResult.result.greeks.vomma}
+								</li>
+								<li id="blackScholesResultListItem">
+									Speed: {blackScholesResult.result.greeks.speed}
+								</li>
+								<li id="blackScholesResultListItem">
+									Zomma: {blackScholesResult.result.greeks.zomma}
+								</li>
+								<li id="blackScholesResultListItem">
+									Color: {blackScholesResult.result.greeks.color}
+								</li>
+								<li id="blackScholesResultListItem">
+									Ultima: {blackScholesResult.result.greeks.ultima}
+								</li>
+								<li id="blackScholesResultListItem">
+									Dual Delta: {blackScholesResult.result.greeks.dual_delta}
+								</li>
+								<li id="blackScholesResultListItem">
+									Dual Gamma: {blackScholesResult.result.greeks.dual_gamma}
 								</li>
 							</ul>
 						</>
 					);
-				case "Volatility":
+				case CalcType.Volatility:
 					return (
 						<>
 							<ul id="blackScholesResultList">
 								<li id="blackScholesResultListItem">
-									Volatility: {blackScholesResult.result.Volatility}%
+									Volatility: {blackScholesResult.result.volatility}%
 								</li>
 							</ul>
 						</>
