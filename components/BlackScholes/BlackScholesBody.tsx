@@ -243,7 +243,7 @@ export default function BlackScholesBody({
 						<>
 							<ul id="blackScholesResultList">
 								<li id="blackScholesResultListItem">
-									Volatility: {blackScholesResult.result.volatility}%
+									Volatility: {+blackScholesResult.result.volatility.toFixed(4)}%
 								</li>
 							</ul>
 						</>
