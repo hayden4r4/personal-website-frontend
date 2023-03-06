@@ -178,58 +178,62 @@ export default function BlackScholesBody({
 						<>
 							<ul id="blackScholesResultList">
 								<li id="blackScholesResultListItem">
-									Option Price: {blackScholesResult.result.optionPrice}
+									Option Price:{" "}
+									{+blackScholesResult.result.optionPrice.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Delta: {blackScholesResult.result.greeks.delta}
+									Delta: {+blackScholesResult.result.greeks.delta.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Gamma: {blackScholesResult.result.greeks.gamma}
+									Gamma: {+blackScholesResult.result.greeks.gamma.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Theta: {blackScholesResult.result.greeks.theta}
+									Theta: {+blackScholesResult.result.greeks.theta.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Vega: {blackScholesResult.result.greeks.vega}
+									Vega: {+blackScholesResult.result.greeks.vega.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Rho: {blackScholesResult.result.greeks.rho}
+									Rho: {+blackScholesResult.result.greeks.rho.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Epsilon: {blackScholesResult.result.greeks.epsilon}
+									Epsilon:{" "}
+									{+blackScholesResult.result.greeks.epsilon.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Lambda: {blackScholesResult.result.greeks.lambda}
+									Lambda: {+blackScholesResult.result.greeks.lambda.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Vanna: {blackScholesResult.result.greeks.vanna}
+									Vanna: {+blackScholesResult.result.greeks.vanna.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Charm: {blackScholesResult.result.greeks.charm}
+									Charm: {+blackScholesResult.result.greeks.charm.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Veta: {blackScholesResult.result.greeks.veta}
+									Veta: {+blackScholesResult.result.greeks.veta.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Vomma: {blackScholesResult.result.greeks.vomma}
+									Vomma: {+blackScholesResult.result.greeks.vomma.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Speed: {blackScholesResult.result.greeks.speed}
+									Speed: {+blackScholesResult.result.greeks.speed.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Zomma: {blackScholesResult.result.greeks.zomma}
+									Zomma: {+blackScholesResult.result.greeks.zomma.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Color: {blackScholesResult.result.greeks.color}
+									Color: {+blackScholesResult.result.greeks.color.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Ultima: {blackScholesResult.result.greeks.ultima}
+									Ultima: {+blackScholesResult.result.greeks.ultima.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Dual Delta: {blackScholesResult.result.greeks.dual_delta}
+									Dual Delta:{" "}
+									{+blackScholesResult.result.greeks.dual_delta.toFixed(4)}
 								</li>
 								<li id="blackScholesResultListItem">
-									Dual Gamma: {blackScholesResult.result.greeks.dual_gamma}
+									Dual Gamma:{" "}
+									{+blackScholesResult.result.greeks.dual_gamma.toFixed(4)}
 								</li>
 							</ul>
 						</>
