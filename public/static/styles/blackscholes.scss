@@ -67,7 +67,7 @@
 	margin: auto;
 	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
 	border-radius: 10px;
-	margin-bottom: 1%;
+	margin-bottom: 1.5%;
 }
 
 #blackScholesApp #blackScholesBody #blackScholesForm .blackScholesFormLabel {
@@ -122,33 +122,26 @@
 	align-items: center;
 	background-color: c.$footer-black-transparent;
 	width: max-content;
-	padding: 0 0.5% 0 0.5%;
+	padding: 0 2.5% 0 2.5%;
 	margin: auto;
 	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
 	border-radius: 10px;
 	margin-bottom: 30px;
 	max-width: 95%;
-	
 }
 
 #blackScholesApp #blackScholesBody #blackScholesResult #blackScholesResultList {
 	list-style-type: none;
 	font-family: "Space Grotesk SemiBold";
 	font-size: 1.5rem;
-	display: grid;
-	columns: auto;
-	grid-template-columns: max-content max-content;
-	text-align: left;
-	column-gap: 15px;
-	padding-left: 3%;
 }
 
-#blackScholesApp
-	#blackScholesBody
-	#blackScholesResult
-	#blackScholesResultListItem {
-	// margin: 10px 0;
-}
+// #blackScholesApp
+// 	#blackScholesBody
+// 	#blackScholesResult
+// 	#blackScholesResultListItem {
+// 	margin: 10px 0;
+// }
 
 // Disables Spinners (up and down arrows) on number input fields
 input[type="number"]::-webkit-outer-spin-button,

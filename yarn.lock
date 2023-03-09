@@ -605,6 +605,11 @@
     "p-limit" "^3.1.0"
     "readable-stream" "^4.0.0"
 
+"@haydenr4/black76_wasm@^0.20.0":
+  "integrity" "sha512-kNVnbwH0g0D53Fsw0DjVXxhKok6MhLCBK1SA9YfWRafNjq5WmriibcjRDuzI0LvFZdQgN4gxYsoFeBClFIhpDA=="
+  "resolved" "https://registry.npmjs.org/@haydenr4/black76_wasm/-/black76_wasm-0.20.0.tgz"
+  "version" "0.20.0"
+
 "@haydenr4/blackscholes_wasm@^0.18.0":
   "integrity" "sha512-NcmoNlQD54ES1WFaQ/SO1KG2T1u+2STqQ5b3rhVwmEarYIYLd2n3cPuiQUse5zMeklppCQ7UiXhB+Fw6XYrLAg=="
   "resolved" "https://registry.npmjs.org/@haydenr4/blackscholes_wasm/-/blackscholes_wasm-0.18.0.tgz"
@@ -9036,7 +9041,7 @@
   "resolved" "https://registry.npmjs.org/nested-error-stacks/-/nested-error-stacks-2.1.1.tgz"
   "version" "2.1.1"
 
-"netlify-cli@^13.0.0":
+"netlify-cli@^13.0.1":
   "integrity" "sha512-1yi9WIvAIhB1gPX8K1dCtkZNZzXG+JkHHj5wSQKqK5LNjTaOQKlbif8MayiCDY9g7hWjclvlw/61DEH3p9lQJw=="
   "resolved" "https://registry.npmjs.org/netlify-cli/-/netlify-cli-13.0.1.tgz"
   "version" "13.0.1"

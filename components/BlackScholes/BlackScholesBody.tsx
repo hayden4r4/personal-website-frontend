@@ -1,8 +1,9 @@
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 
 import textShadowGenerator from "../Utilities/TextEffects";
 import * as PropTypes from "../Utilities/PropTypes";
 import * as blackscholes from "@haydenr4/blackscholes_wasm";
+import * as black76 from "@haydenr4/black76_wasm";
 
 export default function BlackScholesBody({
 	headerShadowColor,
@@ -84,19 +85,27 @@ export default function BlackScholesBody({
 		}
 	}
 
-	const [selectedFormulaType, setSelectedFormulaType] = useState(
+	const [selectedFormulaType, setSelectedFormulaType] = useState<number>(
 		FormulaType.BlackScholes
 	);
 
-	const [selectedCalcType, setSelectedCalcType] = useState(
+	const [selectedCalcType, setSelectedCalcType] = useState<number>(
 		CalcType.PriceGreeks
 	);
 
+	const [blackScholesResult, setBlackScholesResult] = useState<Result>({} as Result);
+
+	const clearBlackScholesResult = () => {
+		setBlackScholesResult({} as Result);
+	};
+
 	function handleFormulaType(event: any) {
+		clearBlackScholesResult();
 		setSelectedFormulaType(event.target.value);
 	}
 
 	function handleCalcType(event: any) {
+		clearBlackScholesResult();
 		setSelectedCalcType(event.target.value);
 	}
 
@@ -116,51 +125,101 @@ export default function BlackScholesBody({
 		[key: string]: any;
 	};
 
-	const [blackScholesResult, setBlackScholesResult] = useState({} as Result);
+	const OptionType = Object.freeze({
+		call: 0,
+		put: 1,
+	});
+
+	function showEpsilon(formulaType: any) {
+		switch (+formulaType) {
+			case FormulaType.BlackScholes:
+				return (
+					<>
+						<li id="blackScholesResultListItem">
+							Epsilon:{+blackScholesResult.result.greeks.epsilon.toFixed(4)}
+						</li>
+					</>
+				);
+		}
+	}
 
 	const HandleSubmit = (event: FormEvent) => {
 		event.preventDefault();
 		const form = event.target as HTMLFormElement;
 
-		const optionType =
-			form.optionType.value === "call"
-				? blackscholes.OptionType.Call
-				: blackscholes.OptionType.Put;
+		function getInputs(formulatType: number) {
+			
+			switch (selectedFormulaType) {
+				case FormulaType.BlackScholes:
+					const optionType =
+						form.optionType.value == OptionType.call
+							? blackscholes.OptionType.Call
+							: blackscholes.OptionType.Put;
 
-		var inputs: blackscholes.Inputs = new blackscholes.Inputs(
-			optionType,
-			form.securityPrice.value as number,
-			form.strikePrice.value as number,
-			undefined,
-			(form.rfRate.value as number) / 100.0,
-			(form.dividendYield.value as number) / 100.0,
-			(form.timeToMaturity.value as number) / 365.25,
-			undefined
-		);
+					console.log(selectedFormulaType);
+					console.log("Black scholes:" + FormulaType.BlackScholes);
+					console.log(optionType);
+					
+					var inputs: blackscholes.Inputs | black76.Inputs =
+						new blackscholes.Inputs(
+							optionType,
+							form.securityPrice.value as number,
+							form.strikePrice.value as number,
+							undefined,
+							(form.rfRate.value as number) / 100.0,
+							(form.dividendYield.value as number) / 100.0,
+							(form.timeToMaturity.value as number) / 365.25,
+							undefined
+						);
+					
+					break;
 
-		const calcType: number = Number(form.calcType.value);
+				case FormulaType.Black76:
+					const optionType2 =
+						form.optionType.value == OptionType.call
+							? black76.OptionType.Call
+							: black76.OptionType.Put;
 
-		switch (calcType) {
+					var inputs2: blackscholes.Inputs | black76.Inputs = new black76.Inputs(
+						optionType2,
+						form.securityPrice.value as number,
+						form.strikePrice.value as number,
+						undefined,
+						(form.rfRate.value as number) / 100.0,
+						(form.timeToMaturity.value as number) / 365.25,
+						undefined
+					);
+					break;
+			}
+			return inputs!;
+		}
+
+		switch (selectedCalcType) {
 			case CalcType.PriceGreeks:
-				inputs.sigma = (form.Volatility.value as number) / 100;
+				const inputs1 = getInputs(selectedFormulaType);
+				inputs1.sigma = (form.Volatility.value as number) / 100;
+				
 				const resultPriceGreeks: ResultPriceGreeks = {
-					optionPrice: inputs.calc_price(),
-					greeks: JSON.parse(inputs.calc_all_greeks()),
+					optionPrice: inputs1.calc_price(),
+					greeks: JSON.parse(inputs1.calc_all_greeks()),
 				};
+				
 				const result: Result = {
-					calcType: calcType,
+					calcType: Number(selectedCalcType),
 					result: resultPriceGreeks,
 				};
 				setBlackScholesResult(result);
+				
 				break;
 
 			case CalcType.Volatility:
-				inputs.p = form.optionPrice.value as number;
+				const inputs2 = getInputs(selectedFormulaType);
+				inputs2.p = form.optionPrice.value as number;
 				const resultVolatility: ResultVolatility = {
-					volatility: inputs.calc_iv(0.0001) * 100,
+					volatility: inputs2.calc_iv(0.0001) * 100,
 				};
 				const result2: Result = {
-					calcType: calcType,
+					calcType: Number(selectedCalcType),
 					result: resultVolatility,
 				};
 				setBlackScholesResult(result2);
@@ -196,10 +255,7 @@ export default function BlackScholesBody({
 								<li id="blackScholesResultListItem">
 									Rho: {+blackScholesResult.result.greeks.rho.toFixed(4)}
 								</li>
-								<li id="blackScholesResultListItem">
-									Epsilon:{" "}
-									{+blackScholesResult.result.greeks.epsilon.toFixed(4)}
-								</li>
+								{showEpsilon(selectedFormulaType)}
 								<li id="blackScholesResultListItem">
 									Lambda: {+blackScholesResult.result.greeks.lambda.toFixed(4)}
 								</li>
@@ -243,7 +299,8 @@ export default function BlackScholesBody({
 						<>
 							<ul id="blackScholesResultList">
 								<li id="blackScholesResultListItem">
-									Volatility: {+blackScholesResult.result.volatility.toFixed(4)}%
+									Volatility: {+blackScholesResult.result.volatility.toFixed(4)}
+									%
 								</li>
 							</ul>
 						</>
@@ -263,18 +320,18 @@ export default function BlackScholesBody({
 				Option Calculator
 			</h1>
 			<form id="blackScholesForm" onSubmit={HandleSubmit}>
-				{/* <label className="blackScholesFormLabel" htmlFor="FormulaType">
+				<label className="blackScholesFormLabel" htmlFor="formulaType">
 					Formula
 				</label>
 				<select
-					name="FormulaType"
+					name="formulaType"
 					className="blackScholesFormInput dropdown"
 					value={selectedFormulaType}
 					onChange={handleFormulaType}
 				>
 					<option value={FormulaType.BlackScholes}>Black Scholes</option>
 					<option value={FormulaType.Black76}>Black 76</option>
-				</select> */}
+				</select>
 				<label className="blackScholesFormLabel" htmlFor="calcType">
 					Calculation Type
 				</label>
@@ -290,9 +347,13 @@ export default function BlackScholesBody({
 				<label className="blackScholesFormLabel" htmlFor="optionType">
 					Option Type
 				</label>
-				<select name="optionType" className="blackScholesFormInput dropdown">
-					<option value="call">Call</option>
-					<option value="put">Put</option>
+				<select
+					name="optionType"
+					className="blackScholesFormInput dropdown"
+					onChange={clearBlackScholesResult}
+				>
+					<option value={OptionType.call}>Call</option>
+					<option value={OptionType.put}>Put</option>
 				</select>
 				<label className="blackScholesFormLabel" htmlFor="strikePrice">
 					Strike Price
