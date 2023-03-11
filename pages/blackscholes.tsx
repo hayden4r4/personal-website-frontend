@@ -8,12 +8,14 @@ import Footer from "../components/Footer/Footer";
 import styles from "../public/static/styles/utilities/_constants.module.scss";
 
 export default function BlackScholes() {
-
 	return (
 		<div id="blackScholesApp">
 			<Head>
-				<title>Portfolio - Hayden Rose</title>
-				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+				<title>Option Pricer - Hayden Rose</title>
+				<meta
+					name="viewport"
+					content="initial-scale=1.0, width=device-width user-scalable=no"
+				/>
 				<meta name="darkreader-lock" />
 				<meta name="color-scheme" content="light" />
 			</Head>

@@ -611,9 +611,9 @@
   "version" "0.20.0"
 
 "@haydenr4/blackscholes_wasm@^0.18.0":
-  "integrity" "sha512-NcmoNlQD54ES1WFaQ/SO1KG2T1u+2STqQ5b3rhVwmEarYIYLd2n3cPuiQUse5zMeklppCQ7UiXhB+Fw6XYrLAg=="
-  "resolved" "https://registry.npmjs.org/@haydenr4/blackscholes_wasm/-/blackscholes_wasm-0.18.0.tgz"
-  "version" "0.18.0"
+  "integrity" "sha512-VEaeyjoq2HTtZdbwLefriZyzz5zJ54mhWHEtCFiUlhYYfbtJvLz//ZvxCAamts8ROj0xgyqJccon8JSM6j9Rog=="
+  "resolved" "https://registry.npmjs.org/@haydenr4/blackscholes_wasm/-/blackscholes_wasm-0.18.1.tgz"
+  "version" "0.18.1"
 
 "@humanwhocodes/config-array@^0.10.4":
   "integrity" "sha512-MDl6D6sBsaV452/QSdX+4CXIjZhIcI0PELsxUjk4U828yd58vk3bTIvk/6w5FY+4hIy9sLW0sfrV7K7Kc++j/w=="

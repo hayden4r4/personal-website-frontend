@@ -1,9 +1,8 @@
-import { useState, useEffect, FormEvent } from "react";
+import { useState, FormEvent } from "react";
+import dynamic from "next/dynamic";
 
 import textShadowGenerator from "../Utilities/TextEffects";
 import * as PropTypes from "../Utilities/PropTypes";
-import * as blackscholes from "@haydenr4/blackscholes_wasm";
-import * as black76 from "@haydenr4/black76_wasm";
 
 export default function BlackScholesBody({
 	headerShadowColor,
@@ -14,7 +13,7 @@ export default function BlackScholesBody({
 	});
 
 	function showFormulaTypeFields(formulaType: any) {
-		switch (+formulaType) {
+		switch (Number(formulaType)) {
 			case FormulaType.BlackScholes:
 				return (
 					<>
@@ -44,7 +43,7 @@ export default function BlackScholesBody({
 	});
 
 	function showCalcTypeFields(calcType: any) {
-		switch (+calcType) {
+		switch (Number(calcType)) {
 			case CalcType.PriceGreeks:
 				return (
 					<>
@@ -93,7 +92,9 @@ export default function BlackScholesBody({
 		CalcType.PriceGreeks
 	);
 
-	const [blackScholesResult, setBlackScholesResult] = useState<Result>({} as Result);
+	const [blackScholesResult, setBlackScholesResult] = useState<Result>(
+		{} as Result
+	);
 
 	const clearBlackScholesResult = () => {
 		setBlackScholesResult({} as Result);
@@ -101,12 +102,12 @@ export default function BlackScholesBody({
 
 	function handleFormulaType(event: any) {
 		clearBlackScholesResult();
-		setSelectedFormulaType(event.target.value);
+		setSelectedFormulaType(Number(event.target.value));
 	}
 
 	function handleCalcType(event: any) {
 		clearBlackScholesResult();
-		setSelectedCalcType(event.target.value);
+		setSelectedCalcType(Number(event.target.value));
 	}
 
 	type Result = {
@@ -136,87 +137,92 @@ export default function BlackScholesBody({
 				return (
 					<>
 						<li id="blackScholesResultListItem">
-							Epsilon:{+blackScholesResult.result.greeks.epsilon.toFixed(4)}
+							Epsilon:
+							{Number(blackScholesResult.result.greeks.epsilon.toFixed(4))}
 						</li>
 					</>
 				);
 		}
 	}
 
-	const HandleSubmit = (event: FormEvent) => {
+	const HandleSubmit = async (event: FormEvent) => {
 		event.preventDefault();
 		const form = event.target as HTMLFormElement;
+		// const BlackWasmComponent = dynamic({
+		// 	loader: async () => {
+		// 		const bs = await import("@haydenr4/blackscholes_wasm");
+		// 		const b76 = await import("@haydenr4/black76_wasm");
 
-		function getInputs(formulatType: number) {
-			
-			switch (selectedFormulaType) {
+		async function getInputs(formulaType: number) {
+			switch (formulaType) {
 				case FormulaType.BlackScholes:
-					const optionType =
-						form.optionType.value == OptionType.call
-							? blackscholes.OptionType.Call
-							: blackscholes.OptionType.Put;
+					const bsinputs = await import("@haydenr4/blackscholes_wasm").then(
+						(bs) => {
+							const optionType =
+								form.optionType.value == OptionType.call
+									? bs.OptionType.Call
+									: bs.OptionType.Put;
 
-					console.log(selectedFormulaType);
-					console.log("Black scholes:" + FormulaType.BlackScholes);
-					console.log(optionType);
-					
-					var inputs: blackscholes.Inputs | black76.Inputs =
-						new blackscholes.Inputs(
-							optionType,
-							form.securityPrice.value as number,
-							form.strikePrice.value as number,
-							undefined,
-							(form.rfRate.value as number) / 100.0,
-							(form.dividendYield.value as number) / 100.0,
-							(form.timeToMaturity.value as number) / 365.25,
-							undefined
-						);
-					
-					break;
+							return new bs.Inputs(
+								optionType,
+								form.securityPrice.value as number,
+								form.strikePrice.value as number,
+								undefined,
+								(form.rfRate.value as number) / 100.0,
+								(form.dividendYield.value as number) / 100.0,
+								(form.timeToMaturity.value as number) / 365.25,
+								undefined
+							);
+						}
+					);
+					return bsinputs;
 
 				case FormulaType.Black76:
-					const optionType2 =
-						form.optionType.value == OptionType.call
-							? black76.OptionType.Call
-							: black76.OptionType.Put;
+					const b76inputs = await import("@haydenr4/black76_wasm").then(
+						(b76) => {
+							const optionType2 =
+								form.optionType.value == OptionType.call
+									? b76.OptionType.Call
+									: b76.OptionType.Put;
 
-					var inputs2: blackscholes.Inputs | black76.Inputs = new black76.Inputs(
-						optionType2,
-						form.securityPrice.value as number,
-						form.strikePrice.value as number,
-						undefined,
-						(form.rfRate.value as number) / 100.0,
-						(form.timeToMaturity.value as number) / 365.25,
-						undefined
+							return new b76.Inputs(
+								optionType2,
+								form.securityPrice.value as number,
+								form.strikePrice.value as number,
+								undefined,
+								(form.rfRate.value as number) / 100.0,
+								(form.timeToMaturity.value as number) / 365.25,
+								undefined
+							);
+						}
 					);
-					break;
+					return b76inputs;
 			}
-			return inputs!;
 		}
 
 		switch (selectedCalcType) {
 			case CalcType.PriceGreeks:
-				const inputs1 = getInputs(selectedFormulaType);
-				inputs1.sigma = (form.Volatility.value as number) / 100;
-				
+				const inputs1 = await getInputs(selectedFormulaType);
+				inputs1!.sigma = (form.Volatility.value as number) / 100;
+
 				const resultPriceGreeks: ResultPriceGreeks = {
-					optionPrice: inputs1.calc_price(),
-					greeks: JSON.parse(inputs1.calc_all_greeks()),
+					optionPrice: inputs1!.calc_price(),
+					greeks: JSON.parse(inputs1!.calc_all_greeks()),
 				};
-				
+
 				const result: Result = {
 					calcType: Number(selectedCalcType),
 					result: resultPriceGreeks,
 				};
 				setBlackScholesResult(result);
-				
+
 				break;
 
 			case CalcType.Volatility:
-				const inputs2 = getInputs(selectedFormulaType);
-				inputs2.p = form.optionPrice.value as number;
+				const inputs2 = await getInputs(selectedFormulaType);
+				inputs2!.p = form.optionPrice.value as number;
 				const resultVolatility: ResultVolatility = {
-					volatility: inputs2.calc_iv(0.0001) * 100,
+					volatility: inputs2!.calc_iv(0.0001) * 100,
 				};
 				const result2: Result = {
 					calcType: Number(selectedCalcType),
@@ -225,6 +231,9 @@ export default function BlackScholesBody({
 				setBlackScholesResult(result2);
 				break;
 		}
+		// return () => <></>;
+		// },
+		// });
 	};
 
 	function getBlackScholesResult() {
@@ -238,58 +247,75 @@ export default function BlackScholesBody({
 							<ul id="blackScholesResultList">
 								<li id="blackScholesResultListItem">
 									Option Price:{" "}
-									{+blackScholesResult.result.optionPrice.toFixed(4)}
+									{Number(blackScholesResult.result.optionPrice.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Delta: {+blackScholesResult.result.greeks.delta.toFixed(4)}
+									Delta:{" "}
+									{Number(blackScholesResult.result.greeks.delta.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Gamma: {+blackScholesResult.result.greeks.gamma.toFixed(4)}
+									Gamma:{" "}
+									{Number(blackScholesResult.result.greeks.gamma.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Theta: {+blackScholesResult.result.greeks.theta.toFixed(4)}
+									Theta:{" "}
+									{Number(blackScholesResult.result.greeks.theta.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Vega: {+blackScholesResult.result.greeks.vega.toFixed(4)}
+									Vega:{" "}
+									{Number(blackScholesResult.result.greeks.vega.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Rho: {+blackScholesResult.result.greeks.rho.toFixed(4)}
+									Rho: {Number(blackScholesResult.result.greeks.rho.toFixed(4))}
 								</li>
 								{showEpsilon(selectedFormulaType)}
 								<li id="blackScholesResultListItem">
-									Lambda: {+blackScholesResult.result.greeks.lambda.toFixed(4)}
+									Lambda:{" "}
+									{Number(blackScholesResult.result.greeks.lambda.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Vanna: {+blackScholesResult.result.greeks.vanna.toFixed(4)}
+									Vanna:{" "}
+									{Number(blackScholesResult.result.greeks.vanna.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Charm: {+blackScholesResult.result.greeks.charm.toFixed(4)}
+									Charm:{" "}
+									{Number(blackScholesResult.result.greeks.charm.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Veta: {+blackScholesResult.result.greeks.veta.toFixed(4)}
+									Veta:{" "}
+									{Number(blackScholesResult.result.greeks.veta.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Vomma: {+blackScholesResult.result.greeks.vomma.toFixed(4)}
+									Vomma:{" "}
+									{Number(blackScholesResult.result.greeks.vomma.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Speed: {+blackScholesResult.result.greeks.speed.toFixed(4)}
+									Speed:{" "}
+									{Number(blackScholesResult.result.greeks.speed.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Zomma: {+blackScholesResult.result.greeks.zomma.toFixed(4)}
+									Zomma:{" "}
+									{Number(blackScholesResult.result.greeks.zomma.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Color: {+blackScholesResult.result.greeks.color.toFixed(4)}
+									Color:{" "}
+									{Number(blackScholesResult.result.greeks.color.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Ultima: {+blackScholesResult.result.greeks.ultima.toFixed(4)}
+									Ultima:{" "}
+									{Number(blackScholesResult.result.greeks.ultima.toFixed(4))}
 								</li>
 								<li id="blackScholesResultListItem">
-									Dual Delta:{" "}
-									{+blackScholesResult.result.greeks.dual_delta.toFixed(4)}
+									Dual Delta:
+									{Number(
+										blackScholesResult.result.greeks.dual_delta.toFixed(4)
+									)}
 								</li>
 								<li id="blackScholesResultListItem">
 									Dual Gamma:{" "}
-									{+blackScholesResult.result.greeks.dual_gamma.toFixed(4)}
+									{Number(
+										blackScholesResult.result.greeks.dual_gamma.toFixed(4)
+									)}
 								</li>
 							</ul>
 						</>
@@ -299,8 +325,8 @@ export default function BlackScholesBody({
 						<>
 							<ul id="blackScholesResultList">
 								<li id="blackScholesResultListItem">
-									Volatility: {+blackScholesResult.result.volatility.toFixed(4)}
-									%
+									Volatility:{" "}
+									{Number(blackScholesResult.result.volatility.toFixed(4))}%
 								</li>
 							</ul>
 						</>
