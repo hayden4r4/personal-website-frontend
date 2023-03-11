@@ -1,10 +1,9 @@
 import { useState, FormEvent } from "react";
-import dynamic from "next/dynamic";
 
 import textShadowGenerator from "../Utilities/TextEffects";
 import * as PropTypes from "../Utilities/PropTypes";
 
-export default function BlackScholesBody({
+export default function OptionCalcBody({
 	headerShadowColor,
 }: PropTypes.TopBarProps) {
 	const FormulaType = Object.freeze({
@@ -17,11 +16,11 @@ export default function BlackScholesBody({
 			case FormulaType.BlackScholes:
 				return (
 					<>
-						<label className="blackScholesFormLabel" htmlFor="dividendYield">
+						<label className="optionCalcFormLabel" htmlFor="dividendYield">
 							Dividend Yield %
 						</label>
 						<input
-							className="blackScholesFormInput"
+							className="optionCalcFormInput"
 							type="number"
 							id="dividendYield"
 							name="dividendYield"
@@ -47,11 +46,11 @@ export default function BlackScholesBody({
 			case CalcType.PriceGreeks:
 				return (
 					<>
-						<label className="blackScholesFormLabel" htmlFor="Volatility">
+						<label className="optionCalcFormLabel" htmlFor="Volatility">
 							Volatility %
 						</label>
 						<input
-							className="blackScholesFormInput"
+							className="optionCalcFormInput"
 							type="number"
 							id="Volatility"
 							name="Volatility"
@@ -66,11 +65,11 @@ export default function BlackScholesBody({
 			case CalcType.Volatility:
 				return (
 					<>
-						<label className="blackScholesFormLabel" htmlFor="optionPrice">
+						<label className="optionCalcFormLabel" htmlFor="optionPrice">
 							Option Price
 						</label>
 						<input
-							className="blackScholesFormInput"
+							className="optionCalcFormInput"
 							type="number"
 							id="optionPrice"
 							name="optionPrice"
@@ -92,21 +91,21 @@ export default function BlackScholesBody({
 		CalcType.PriceGreeks
 	);
 
-	const [blackScholesResult, setBlackScholesResult] = useState<Result>(
+	const [optionCalcResult, setOptionCalcResult] = useState<Result>(
 		{} as Result
 	);
 
-	const clearBlackScholesResult = () => {
-		setBlackScholesResult({} as Result);
+	const clearOptionCalcResult = () => {
+		setOptionCalcResult({} as Result);
 	};
 
 	function handleFormulaType(event: any) {
-		clearBlackScholesResult();
+		clearOptionCalcResult();
 		setSelectedFormulaType(Number(event.target.value));
 	}
 
 	function handleCalcType(event: any) {
-		clearBlackScholesResult();
+		clearOptionCalcResult();
 		setSelectedCalcType(Number(event.target.value));
 	}
 
@@ -136,9 +135,9 @@ export default function BlackScholesBody({
 			case FormulaType.BlackScholes:
 				return (
 					<>
-						<li id="blackScholesResultListItem">
+						<li id="optionCalcResultListItem">
 							Epsilon:
-							{Number(blackScholesResult.result.greeks.epsilon.toFixed(4))}
+							{Number(optionCalcResult.result.greeks.epsilon.toFixed(4))}
 						</li>
 					</>
 				);
@@ -148,10 +147,6 @@ export default function BlackScholesBody({
 	const HandleSubmit = async (event: FormEvent) => {
 		event.preventDefault();
 		const form = event.target as HTMLFormElement;
-		// const BlackWasmComponent = dynamic({
-		// 	loader: async () => {
-		// 		const bs = await import("@haydenr4/blackscholes_wasm");
-		// 		const b76 = await import("@haydenr4/black76_wasm");
 
 		async function getInputs(formulaType: number) {
 			switch (formulaType) {
@@ -214,7 +209,7 @@ export default function BlackScholesBody({
 					calcType: Number(selectedCalcType),
 					result: resultPriceGreeks,
 				};
-				setBlackScholesResult(result);
+				setOptionCalcResult(result);
 
 				break;
 
@@ -228,7 +223,7 @@ export default function BlackScholesBody({
 					calcType: Number(selectedCalcType),
 					result: resultVolatility,
 				};
-				setBlackScholesResult(result2);
+				setOptionCalcResult(result2);
 				break;
 		}
 		// return () => <></>;
@@ -236,86 +231,80 @@ export default function BlackScholesBody({
 		// });
 	};
 
-	function getBlackScholesResult() {
-		if (blackScholesResult === ({} as Result)) {
+	function getOptionCalcResult() {
+		if (optionCalcResult === ({} as Result)) {
 			return <></>;
 		} else {
-			switch (blackScholesResult.calcType) {
+			switch (optionCalcResult.calcType) {
 				case CalcType.PriceGreeks:
 					return (
 						<>
-							<ul id="blackScholesResultList">
-								<li id="blackScholesResultListItem">
+							<ul id="optionCalcResultList">
+								<li id="optionCalcResultListItem">
 									Option Price:{" "}
-									{Number(blackScholesResult.result.optionPrice.toFixed(4))}
+									{Number(optionCalcResult.result.optionPrice.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Delta:{" "}
-									{Number(blackScholesResult.result.greeks.delta.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.delta.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Gamma:{" "}
-									{Number(blackScholesResult.result.greeks.gamma.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.gamma.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Theta:{" "}
-									{Number(blackScholesResult.result.greeks.theta.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.theta.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
-									Vega:{" "}
-									{Number(blackScholesResult.result.greeks.vega.toFixed(4))}
+								<li id="optionCalcResultListItem">
+									Vega: {Number(optionCalcResult.result.greeks.vega.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
-									Rho: {Number(blackScholesResult.result.greeks.rho.toFixed(4))}
+								<li id="optionCalcResultListItem">
+									Rho: {Number(optionCalcResult.result.greeks.rho.toFixed(4))}
 								</li>
 								{showEpsilon(selectedFormulaType)}
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Lambda:{" "}
-									{Number(blackScholesResult.result.greeks.lambda.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.lambda.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Vanna:{" "}
-									{Number(blackScholesResult.result.greeks.vanna.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.vanna.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Charm:{" "}
-									{Number(blackScholesResult.result.greeks.charm.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.charm.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
-									Veta:{" "}
-									{Number(blackScholesResult.result.greeks.veta.toFixed(4))}
+								<li id="optionCalcResultListItem">
+									Veta: {Number(optionCalcResult.result.greeks.veta.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Vomma:{" "}
-									{Number(blackScholesResult.result.greeks.vomma.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.vomma.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Speed:{" "}
-									{Number(blackScholesResult.result.greeks.speed.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.speed.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Zomma:{" "}
-									{Number(blackScholesResult.result.greeks.zomma.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.zomma.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Color:{" "}
-									{Number(blackScholesResult.result.greeks.color.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.color.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Ultima:{" "}
-									{Number(blackScholesResult.result.greeks.ultima.toFixed(4))}
+									{Number(optionCalcResult.result.greeks.ultima.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Dual Delta:
-									{Number(
-										blackScholesResult.result.greeks.dual_delta.toFixed(4)
-									)}
+									{Number(optionCalcResult.result.greeks.dual_delta.toFixed(4))}
 								</li>
-								<li id="blackScholesResultListItem">
+								<li id="optionCalcResultListItem">
 									Dual Gamma:{" "}
-									{Number(
-										blackScholesResult.result.greeks.dual_gamma.toFixed(4)
-									)}
+									{Number(optionCalcResult.result.greeks.dual_gamma.toFixed(4))}
 								</li>
 							</ul>
 						</>
@@ -323,10 +312,10 @@ export default function BlackScholesBody({
 				case CalcType.Volatility:
 					return (
 						<>
-							<ul id="blackScholesResultList">
-								<li id="blackScholesResultListItem">
+							<ul id="optionCalcResultList">
+								<li id="optionCalcResultListItem">
 									Volatility:{" "}
-									{Number(blackScholesResult.result.volatility.toFixed(4))}%
+									{Number(optionCalcResult.result.volatility.toFixed(4))}%
 								</li>
 							</ul>
 						</>
@@ -336,56 +325,56 @@ export default function BlackScholesBody({
 	}
 
 	return (
-		<div id="blackScholesBody">
+		<div id="optionCalcBody">
 			<h1
-				id="blackScholesHeader"
+				id="optionCalcHeader"
 				style={{
 					textShadow: textShadowGenerator(0, 0.1, 0.0025, headerShadowColor),
 				}}
 			>
 				Option Calculator
 			</h1>
-			<form id="blackScholesForm" onSubmit={HandleSubmit}>
-				<label className="blackScholesFormLabel" htmlFor="formulaType">
+			<form id="optionCalcForm" onSubmit={HandleSubmit}>
+				<label className="optionCalcFormLabel" htmlFor="formulaType">
 					Formula
 				</label>
 				<select
 					name="formulaType"
-					className="blackScholesFormInput dropdown"
+					className="optionCalcFormInput dropdown"
 					value={selectedFormulaType}
 					onChange={handleFormulaType}
 				>
 					<option value={FormulaType.BlackScholes}>Black Scholes</option>
 					<option value={FormulaType.Black76}>Black 76</option>
 				</select>
-				<label className="blackScholesFormLabel" htmlFor="calcType">
+				<label className="optionCalcFormLabel" htmlFor="calcType">
 					Calculation Type
 				</label>
 				<select
 					name="calcType"
-					className="blackScholesFormInput dropdown"
+					className="optionCalcFormInput dropdown"
 					value={selectedCalcType}
 					onChange={handleCalcType}
 				>
 					<option value={CalcType.PriceGreeks}>Option Price & Greeks</option>
 					<option value={CalcType.Volatility}>Volatility (IV%)</option>
 				</select>
-				<label className="blackScholesFormLabel" htmlFor="optionType">
+				<label className="optionCalcFormLabel" htmlFor="optionType">
 					Option Type
 				</label>
 				<select
 					name="optionType"
-					className="blackScholesFormInput dropdown"
-					onChange={clearBlackScholesResult}
+					className="optionCalcFormInput dropdown"
+					onChange={clearOptionCalcResult}
 				>
 					<option value={OptionType.call}>Call</option>
 					<option value={OptionType.put}>Put</option>
 				</select>
-				<label className="blackScholesFormLabel" htmlFor="strikePrice">
+				<label className="optionCalcFormLabel" htmlFor="strikePrice">
 					Strike Price
 				</label>
 				<input
-					className="blackScholesFormInput"
+					className="optionCalcFormInput"
 					type="number"
 					id="strikePrice"
 					name="strikePrice"
@@ -394,11 +383,11 @@ export default function BlackScholesBody({
 					step="any"
 					required
 				/>
-				<label className="blackScholesFormLabel" htmlFor="securityPrice">
+				<label className="optionCalcFormLabel" htmlFor="securityPrice">
 					Security Price
 				</label>
 				<input
-					className="blackScholesFormInput"
+					className="optionCalcFormInput"
 					type="number"
 					id="securityPrice"
 					name="securityPrice"
@@ -410,11 +399,11 @@ export default function BlackScholesBody({
 
 				{showCalcTypeFields(selectedCalcType)}
 
-				<label className="blackScholesFormLabel" htmlFor="rfRate">
+				<label className="optionCalcFormLabel" htmlFor="rfRate">
 					Risk-Free Rate %
 				</label>
 				<input
-					className="blackScholesFormInput"
+					className="optionCalcFormInput"
 					type="number"
 					id="rfRate"
 					name="rfRate"
@@ -423,11 +412,11 @@ export default function BlackScholesBody({
 					step="any"
 					required
 				/>
-				<label className="blackScholesFormLabel" htmlFor="timeToMaturity">
+				<label className="optionCalcFormLabel" htmlFor="timeToMaturity">
 					Time to Maturity (Days)
 				</label>
 				<input
-					className="blackScholesFormInput"
+					className="optionCalcFormInput"
 					type="number"
 					id="timeToMaturity"
 					name="timeToMaturity"
@@ -441,13 +430,13 @@ export default function BlackScholesBody({
 
 				<br></br>
 				<input
-					className="blackScholesFormInput"
+					className="optionCalcFormInput"
 					type="submit"
-					id="blackScholesFormCalculate"
+					id="optionCalcFormCalculate"
 					value="Calculate"
 				/>
 			</form>
-			<div id="blackScholesResult">{getBlackScholesResult()}</div>
+			<div id="optionCalcResult">{getOptionCalcResult()}</div>
 		</div>
 	);
 }

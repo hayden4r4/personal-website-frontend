@@ -1,15 +1,15 @@
 import Head from "next/head";
 
-import BlackScholesBody from "../components/BlackScholes/BlackScholesBody";
+import OptionCalcBody from "../components/OptionCalc/OptionCalc";
 
 import TopBar from "../components/TopBar/TopBar";
 import Footer from "../components/Footer/Footer";
 
 import styles from "../public/static/styles/utilities/_constants.module.scss";
 
-export default function BlackScholes() {
+export default function OptionCalculator() {
 	return (
-		<div id="blackScholesApp">
+		<div id="optionCalcApp">
 			<Head>
 				<title>Option Pricer - Hayden Rose</title>
 				<meta
@@ -19,9 +19,9 @@ export default function BlackScholes() {
 				<meta name="darkreader-lock" />
 				<meta name="color-scheme" content="light" />
 			</Head>
-			<div id="blackScholesView">
+			<div id="optionCalcView">
 				<TopBar headerShadowColor={styles.yellowDark} />
-				<BlackScholesBody headerShadowColor={styles.yellowDark} />
+				<OptionCalcBody headerShadowColor={styles.yellowDark} />
 			</div>
 			<Footer />
 		</div>

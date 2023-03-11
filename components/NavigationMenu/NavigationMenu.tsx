@@ -13,10 +13,10 @@ export default function NavigationMenu({
 		>
 			<ul className="navigationMenuList">
 				<li className="navigationMenuListItem">
-					<Link href="/blackscholes" title="Black Scholes Calculator">
+					<Link href="/optioncalculator" title="Option Calculator">
 						<a
 							className="navigationMenuLink"
-							title="Option Pricer using Black-Scholes"
+							title="Option Calculator using Black-Scholes or Black76"
 						>
 							Option Calculator
 						</a>

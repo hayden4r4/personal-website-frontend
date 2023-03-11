@@ -5,6 +5,7 @@ import textShadowGenerator from "../Utilities/TextEffects";
 import * as PropTypes from "../Utilities/PropTypes";
 
 import BSCode from "../../public/static/images/CodeScreenshots/BSCode.png";
+// import BS76Code from "../../public/static/images/CodeScreenshots/BS76Code.png";
 import PersonalWebsiteCode from "../../public/static/images/CodeScreenshots/PersonalWebsiteCode.png";
 import CNNCatDogCode from "../../public/static/images/CodeScreenshots/CNNCatDogCode.png";
 import GEXCode from "../../public/static/images/CodeScreenshots/GEXCode.png";
@@ -76,6 +77,30 @@ export default function PortfolioBody({
 						</div>
 					</Link>
 				</div>
+				{/* <div className="portfolioGridItem">
+					<Link href="https://github.com/hayden4r4/black76-rust">
+						<div
+							className="portfolioGridItemBody"
+							title="Github/hayden4r4/black76-rust"
+						>
+							<h2 className="portfolioGridProjectName">
+								Black76 Calculator
+							</h2>
+
+							<h4 className="portfolioGridLangDate">Rust 🦀 | 2022</h4>
+							<p className="portfolioGridProjectDescription">
+								An implementation of the Black76 option pricing model in
+								Rust
+							</p>
+							<Image
+								src={BSCode}
+								alt="Black76 Calculator Code Screenshot"
+								quality={100}
+								placeholder="blur"
+							></Image>
+						</div>
+					</Link>
+				</div> */}
 				<div className="portfolioGridItem">
 					<Link href="https://github.com/hayden4r4/CNN_Cat_Dog">
 						<div
@@ -200,8 +225,8 @@ export default function PortfolioBody({
 
 							<h4 className="portfolioGridLangDate">Solidity 🪙 | 2021</h4>
 							<p className="portfolioGridProjectDescription">
-								A full-featured permissionless balloon payment loan smart contract
-								built on Ethereum
+								A full-featured permissionless balloon payment loan smart
+								contract built on Ethereum
 							</p>
 							<Image
 								src={ERC20LoanCode}

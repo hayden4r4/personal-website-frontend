@@ -4,14 +4,14 @@
 @use "utilities/fonts";
 @use "topBar";
 
-#blackScholesApp {
+#optionCalcApp {
 	height: 100%;
 	width: 100%;
 	position: absolute;
 	z-index: -1;
 }
 
-#blackScholesView {
+#optionCalcView {
 	background-image: url("../images/mars-yellow.png");
 	background-repeat: no-repeat;
 	background-position: center top;
@@ -26,23 +26,23 @@
 	// -moz-animation: 0.8s linear 0s 1 blur;
 }
 
-#blackScholesApp .navigationMenu,
-#blackScholesApp .navigationMenu.showMenu {
+#optionCalcApp .navigationMenu,
+#optionCalcApp .navigationMenu.showMenu {
 	background-color: c.$yellow-transparent;
 }
 
-#blackScholesApp #topBarHeading p:after {
+#optionCalcApp #topBarHeading p:after {
 	background: c.$yellow;
 }
 
-#blackScholesApp #blackScholesBody {
+#optionCalcApp #optionCalcBody {
 	z-index: 1;
 	padding-top: c.$top-bar-height;
 	height: calc(100% - c.$top-bar-height);
 	overflow-y: auto;
 }
 
-#blackScholesApp #blackScholesBody #blackScholesHeader {
+#optionCalcApp #optionCalcBody #optionCalcHeader {
 	text-align: center;
 	font-size: 4rem;
 	font-family: "Space Grotesk Bold";
@@ -51,7 +51,7 @@
 	padding-bottom: 2.5%;
 }
 
-#blackScholesApp #blackScholesBody #blackScholesForm {
+#optionCalcApp #optionCalcBody #optionCalcForm {
 	font-size: 1.2rem;
 	display: grid;
 	grid-template-columns: max-content max-content;
@@ -70,13 +70,13 @@
 	margin-bottom: 1.5%;
 }
 
-#blackScholesApp #blackScholesBody #blackScholesForm .blackScholesFormLabel {
+#optionCalcApp #optionCalcBody #optionCalcForm .optionCalcFormLabel {
 	color: white;
 	font-family: "Space Grotesk SemiBold";
 	text-align: right;
 }
 
-#blackScholesApp #blackScholesBody #blackScholesForm .blackScholesFormInput {
+#optionCalcApp #optionCalcBody #optionCalcForm .optionCalcFormInput {
 	background-color: c.$footer-black;
 	border-bottom: 1px solid white;
 	color: white;
@@ -89,28 +89,22 @@
 	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
 }
 
-#blackScholesApp
-	#blackScholesBody
-	#blackScholesForm
-	.blackScholesFormInput:focus {
+#optionCalcApp #optionCalcBody #optionCalcForm .optionCalcFormInput:focus {
 	outline: none !important;
 	border-bottom: 3px solid white;
 	transition: all 0.05s linear;
 	box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
 }
 
-#blackScholesApp
-	#blackScholesBody
-	#blackScholesForm
-	#blackScholesFormCalculate:hover,
-.blackScholesFormInput.dropdown:hover {
+#optionCalcApp #optionCalcBody #optionCalcForm #optionCalcFormCalculate:hover,
+.optionCalcFormInput.dropdown:hover {
 	border-bottom: 3px solid white;
 	transition: all 0.05s linear;
 	box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
 	cursor: pointer;
 }
 
-#blackScholesApp #blackScholesBody #blackScholesResult {
+#optionCalcApp #optionCalcBody #optionCalcResult {
 	font-size: 1.5rem;
 	display: grid;
 	grid-template-columns: max-content max-content;
@@ -130,7 +124,7 @@
 	max-width: 95%;
 }
 
-#blackScholesApp #blackScholesBody #blackScholesResult #blackScholesResultList {
+#optionCalcApp #optionCalcBody #optionCalcResult #optionCalcResultList {
 	list-style-type: none;
 	font-family: "Space Grotesk SemiBold";
 	font-size: 1.5rem;
@@ -142,10 +136,10 @@
 	padding-left: 3%;
 }
 
-// #blackScholesApp
-// 	#blackScholesBody
-// 	#blackScholesResult
-// 	#blackScholesResultListItem {
+// #optionCalcApp
+// 	#optionCalcBody
+// 	#optionCalcResult
+// 	#optionCalcResultListItem {
 // 	margin: 10px 0;
 // }
 
