@@ -77,7 +77,7 @@ export default function PortfolioBody({
 						</div>
 					</Link>
 				</div>
-				{/* <div className="portfolioGridItem">
+				<div className="portfolioGridItem">
 					<Link href="https://github.com/hayden4r4/black76-rust">
 						<div
 							className="portfolioGridItemBody"
@@ -100,7 +100,7 @@ export default function PortfolioBody({
 							></Image>
 						</div>
 					</Link>
-				</div> */}
+				</div>
 				<div className="portfolioGridItem">
 					<Link href="https://github.com/hayden4r4/CNN_Cat_Dog">
 						<div
