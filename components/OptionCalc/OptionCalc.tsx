@@ -381,7 +381,7 @@ export default function OptionCalcBody({
 					required
 				/>
 				<label className="optionCalcFormLabel" htmlFor="securityPrice">
-					Security Price
+				{selectedFormulaType ? "Future Price" : "Security Price"}
 				</label>
 				<input
 					className="optionCalcFormInput"
