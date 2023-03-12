@@ -160,12 +160,12 @@ export default function OptionCalcBody({
 
 							return new bs.Inputs(
 								optionType,
-								form.securityPrice.value as number,
-								form.strikePrice.value as number,
+								Number(form.securityPrice.value),
+								Number(form.strikePrice.value),
 								undefined,
-								(form.rfRate.value as number) / 100.0,
-								(form.dividendYield.value as number) / 100.0,
-								(form.timeToMaturity.value as number) / 365.25,
+								Number(form.rfRate.value) / 100.0,
+								Number(form.dividendYield.value) / 100.0,
+								Number(form.timeToMaturity.value) / 365.25,
 								undefined
 							);
 						}
@@ -182,11 +182,11 @@ export default function OptionCalcBody({
 
 							return new b76.Inputs(
 								optionType2,
-								form.securityPrice.value as number,
-								form.strikePrice.value as number,
+								Number(form.securityPrice.value),
+								Number(form.strikePrice.value),
 								undefined,
-								(form.rfRate.value as number) / 100.0,
-								(form.timeToMaturity.value as number) / 365.25,
+								Number(form.rfRate.value) / 100.0,
+								Number(form.timeToMaturity.value) / 365.25,
 								undefined
 							);
 						}
@@ -198,7 +198,7 @@ export default function OptionCalcBody({
 		switch (selectedCalcType) {
 			case CalcType.PriceGreeks:
 				const inputs1 = await getInputs(selectedFormulaType);
-				inputs1!.sigma = (form.Volatility.value as number) / 100;
+				inputs1!.sigma = Number(form.Volatility.value) / 100.0;
 
 				const resultPriceGreeks: ResultPriceGreeks = {
 					optionPrice: inputs1!.calc_price(),
@@ -215,9 +215,9 @@ export default function OptionCalcBody({
 
 			case CalcType.Volatility:
 				const inputs2 = await getInputs(selectedFormulaType);
-				inputs2!.p = form.optionPrice.value as number;
+				inputs2!.p = Number(form.optionPrice.value);
 				const resultVolatility: ResultVolatility = {
-					volatility: inputs2!.calc_iv(0.0001) * 100,
+					volatility: inputs2!.calc_iv(0.01) * 100.0,
 				};
 				const result2: Result = {
 					calcType: Number(selectedCalcType),
@@ -226,9 +226,6 @@ export default function OptionCalcBody({
 				setOptionCalcResult(result2);
 				break;
 		}
-		// return () => <></>;
-		// },
-		// });
 	};
 
 	function getOptionCalcResult() {
