@@ -127,7 +127,8 @@
 #optionCalcApp #optionCalcBody #optionCalcResult #optionCalcResultList {
 	list-style-type: none;
 	font-family: "Space Grotesk SemiBold";
-	font-size: 1.5rem;
+	// font-size: 1.2rem;
+	font-size: min(4vw, 1.5rem);
 	display: grid;
 	columns: auto;
 	grid-template-columns: max-content max-content;
